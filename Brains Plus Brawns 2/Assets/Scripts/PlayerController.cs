@@ -48,12 +48,12 @@ public class PlayerController : MonoBehaviour
             // If-else if to prevent diagonal movement
 
             // Set moving to true if player is at desired position
-            animator.SetBool("isMoving", false);
+            // animator.SetBool("isMoving", false);
         }
         else
         {
             // Set moving to true if player is not at desired position
-            animator.SetBool("isMoving", true);
+            // animator.SetBool("isMoving", true);
         }
     }
 
@@ -61,14 +61,12 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector3 direction)
     {
         Vector3 newPosition = movePoint.position + direction;
-        movePoint.position = newPosition;
-
-        /*
+      
         // Checks for potential overlap of new position with objects on obstacle layer
-        if (!Physics2D.OverlapCircle(newPosition, 0.2f, obstaclesLayer))
+        if (Physics2D.OverlapCircle(newPosition, 0.2f, obstaclesLayer) == null)
         {
             movePoint.position = newPosition;
         }
-        */
+
     }
 }
