@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 8700e0fc64b5b884d825c33ed9952077
+guid: 59c6922df8b1cd14da27c86566459731
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -136,43 +136,169 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bb2 tileset-Sheet_0
+      name: battleui_tileset_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 112
+        y: 48
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 202acfd8d2f692745946a30f690cef2b
-      internalID: 426833872
+      spriteID: cb4d92057d82bc44faa5a370c2d3bfc3
+      internalID: 536440796
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: bb2 tileset-Sheet_1
+      name: battleui_tileset_1
       rect:
         serializedVersion: 2
         x: 16
-        y: 112
+        y: 48
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ecd0d930c80d83140a3396b30c5c03dc
-      internalID: -1381489110
+      spriteID: 956dc6886aa8f664186114139d7731c2
+      internalID: 1298611031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29e7265702e63444989bffbfd640e830
+      internalID: 716307746
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_3
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 795da8c6a109c3445b5af32397f8a8fc
+      internalID: 1584778705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ac168b93aa91b7943acf3357324d62e8
+      internalID: 998377420
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a08376f9e3be13b42afbb3e909a46a11
+      internalID: 743312838
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 596079395ef76264e94dec83a51821c5
+      internalID: -2032612632
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: battleui_tileset_7
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 165c969e35b76194a85643e42c892b48
+      internalID: -935495810
       vertices: []
       indices: 
       edges: []
@@ -188,8 +314,14 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      bb2 tileset-Sheet_0: 426833872
-      bb2 tileset-Sheet_1: -1381489110
+      battleui_tileset_0: 536440796
+      battleui_tileset_1: 1298611031
+      battleui_tileset_2: 716307746
+      battleui_tileset_3: 1584778705
+      battleui_tileset_4: 998377420
+      battleui_tileset_5: 743312838
+      battleui_tileset_6: -2032612632
+      battleui_tileset_7: -935495810
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

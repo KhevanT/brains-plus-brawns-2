@@ -2,10 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class PlayerController : MonoBehaviour
 {
     // Movement variables
+    public Vector2 startingPos = Vector2.zero;
     public float moveSpeed = 5f;
     public Transform movePoint; // helps keep track of player's next position
 
@@ -18,6 +20,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Set object to starting position
+        transform.position = startingPos;
+
         // Make move point unparented to player object to ensure correct movement
         // In the scene its parented for better organisation
         movePoint.parent = null;
@@ -34,7 +39,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
 
         // Updates movepoint pos based on user input,
-        //  only if player is actually close to movepoint position first
+        // only if player is actually close to movepoint position first
         if (Vector3.Distance(transform.position, movePoint.position) <= 0.05f)
         {
             if (Mathf.Abs(horizontalInput) == 1f) // Update horizontal (X-axis) position
@@ -61,12 +66,14 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector3 direction)
     {
         Vector3 newPosition = movePoint.position + direction;
-      
+        movePoint.position = newPosition;
+
+        /*
         // Checks for potential overlap of new position with objects on obstacle layer
         if (Physics2D.OverlapCircle(newPosition, 0.2f, obstaclesLayer) == null)
         {
             movePoint.position = newPosition;
         }
-
+        */
     }
 }
