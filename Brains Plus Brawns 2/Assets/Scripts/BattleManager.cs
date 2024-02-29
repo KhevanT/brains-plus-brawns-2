@@ -299,9 +299,9 @@ public class BattleManager : MonoBehaviour
             {
                 turnIndicator.SetText(currEntity.entityName + "'s Second Turn: ");
 
-                TurnChoice turnChoice = getTurnChoice();
-                // TurnChoice turnChoice = TurnChoice.Attack;
-                currEntity.turnHandler(turnChoice, ref playerPartyMemberComponents); // bosses only
+                //TurnChoice turnChoice = getTurnChoice();
+                //// TurnChoice turnChoice = TurnChoice.Attack;
+                //currEntity.turnHandler(turnChoice, ref playerPartyMemberComponents); // bosses only
             }
 
             // Update playerPartyMemberComponents and enemyPartyComponents (if anyone died) after each turn
@@ -408,15 +408,15 @@ public class BattleManager : MonoBehaviour
         */
     }
 
-    BattleEntity.TurnChoice checkForButtonClick()
-    {
-        if (attackClicked)
-            return BattleEntity.TurnChoice.Attack;
-        else if (guardClicked)
-            return BattleEntity.TurnChoice.Guard;
-        else if (healClicked)
-            return BattleEntity.TurnChoice.Heal;
-    }
+    //BattleEntity.TurnChoice checkForButtonClick()
+    //{
+    //    if (attackClicked)
+    //        return BattleEntity.TurnChoice.Attack;
+    //    else if (guardClicked)
+    //        return BattleEntity.TurnChoice.Guard;
+    //    else if (healClicked)
+    //        return BattleEntity.TurnChoice.Heal;
+    //}
 
 
     // Called when corresponding buttons are clicked
