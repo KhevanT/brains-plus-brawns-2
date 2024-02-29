@@ -13,6 +13,10 @@ public class PlayerController : MonoBehaviour
 
     // Collision variables
     public LayerMask obstaclesLayer;
+    public LayerMask CollisionLayer;
+
+    private DialogueManager dialogueManager;
+    private DialogueTrigger nearbyNPCDialogue;
 
     // Animation variables (may not need)
     public Animator animator;
@@ -26,10 +30,20 @@ public class PlayerController : MonoBehaviour
         // Make move point unparented to player object to ensure correct movement
         // In the scene its parented for better organisation
         movePoint.parent = null;
+
+        // Get the dialogue manager to later on check whether a dialogue is currently in play or not.
+        dialogueManager = GameObject.FindGameObjectWithTag("Dialogue Manager").GetComponent<DialogueManager>();
     }
 
     // Update is called once per frame
     void Update()
+    {
+        InputMovement();
+
+        InteractWithNPC();
+    }
+
+    private void InputMovement()
     {
         // Save current user input value
         float horizontalInput = Input.GetAxisRaw("Horizontal");
@@ -66,14 +80,25 @@ public class PlayerController : MonoBehaviour
     private void Move(Vector3 direction)
     {
         Vector3 newPosition = movePoint.position + direction;
-        movePoint.position = newPosition;
 
-        /*
         // Checks for potential overlap of new position with objects on obstacle layer
         if (Physics2D.OverlapCircle(newPosition, 0.2f, obstaclesLayer) == null)
         {
             movePoint.position = newPosition;
+            CheckForNPCInteraction();
         }
-        */
+    }
+
+    private void CheckForNPCInteraction()
+    {
+        Collider2D interactable = Physics2D.OverlapCircle(movePoint.position, 0.2f, CollisionLayer);
+        if (interactable != null)
+            nearbyNPCDialogue = interactable.gameObject.GetComponentInParent<DialogueTrigger>();
+    }
+
+    private void InteractWithNPC()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && !dialogueManager.isDialogueActive)
+            nearbyNPCDialogue.TriggerDialogue();
     }
 }

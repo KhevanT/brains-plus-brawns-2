@@ -65,7 +65,7 @@ public class BattleEntity
     // (must be called once per alive defender even in case of sweeping move)
     protected int calculateDMG(BattleEntity defender, Move move)
     {
-        int dmg = 0;
+        int dmg;
         float randomFac = Random.value + 0.5f; // rand val b/w 0.5 and 1.5
 
         // < NON FINAL DAMAGE FORMULA >
