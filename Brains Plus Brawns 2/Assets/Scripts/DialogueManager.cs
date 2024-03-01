@@ -10,10 +10,21 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueArea;
 
     private Queue<DialogueLine> lines = new Queue<DialogueLine>();
+    DialogueTrigger currentTrigger = null;
+    DialogueLine currentLine = null;
 
     public bool isDialogueActive = false;
 
     public float typingSpeed = 0.2f;
+
+    // Password List
+    Dictionary<Kingdom, string> passwordList = new Dictionary<Kingdom, string>
+    {
+        {Kingdom.GICT, "Hephaestus" },
+        {Kingdom.AMSOM, "Jeff Bezos" },
+        {Kingdom.SAS, "Marie Curie" },
+    };
+
 
     private void SetChildren(bool activeStat)
     {
@@ -23,15 +34,40 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void StartDialogue(List<DialogueLine> dialogue)
+    public IEnumerator StartDialogue(DialogueTrigger trigger, List<DialogueLine> dialogue)
     {
+        currentTrigger = trigger;
+
         isDialogueActive = true;
 
         SetChildren(true);              // Makes the UI visible when dialogue starts
 
-        Debug.Log(lines.Count);
         foreach (DialogueLine line in dialogue)
         {
+            currentLine = line;
+            if(line.isTriggerToGate)
+            {
+                // Enable password child, then make it child of canvas to make it visible
+                GameObject passwordObject = trigger.GetPasswordObject();
+                Debug.Log(passwordObject);
+                passwordObject.SetActive(true);
+                passwordObject.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
+                Debug.Log("Asking for GICT password");
+
+                // Take input from field, check if its correct
+                while (!currentTrigger.isPasswordCorrect)
+                {
+                    yield return null;
+                }
+
+                // Allow players to exit dialogue if they don't want to enter this kingdom rn
+                // EndDialogue();
+
+                // Disable passsword after done
+                passwordObject.SetActive(false);
+
+            }
+
             lines.Enqueue(line);
         }
 
@@ -69,6 +105,31 @@ public class DialogueManager : MonoBehaviour
     {
         isDialogueActive = false;
         SetChildren(false);              // Makes the UI invisible when dialogue ends
+
+        if(currentTrigger.isGateKeeper) 
+        {
+            // Load corresponding scene
+            Debug.Log("Loading next kingdom");
+        }
+    }
+
+    // Reads password and verifies, for entry into kingdom using gate
+    public void ReadPassword()
+    {
+        // Access npc's kingdom (temp)
+        Kingdom kingdom = currentTrigger.locationKingdom;
+        // Text input = inputField.GetComponent<Text>(); // THIS DOES NOT WORK RN
+        Input = "BLAH";
+
+        if(input == passwordList[kingdom])
+        {
+            Debug.Log("Password is correct");
+            currentTrigger.isPasswordCorrect = true;
+        }
+        else
+        {
+            Debug.Log("Wrong password. Try again");
+        }
     }
 
     private void Start()
@@ -78,7 +139,7 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !currentLine.isTriggerToGate)
         {
             DisplayNextDialogueLine();
         }
