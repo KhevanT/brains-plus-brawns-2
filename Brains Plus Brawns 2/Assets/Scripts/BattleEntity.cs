@@ -74,7 +74,7 @@ public class BattleEntity : MonoBehaviour
     }
     
     // Calls functions based on turn choice
-    public void turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam)
+    public void turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam, int moveChoice=0)
     {
         if(!alive)
         {
@@ -98,7 +98,7 @@ public class BattleEntity : MonoBehaviour
             switch (turnChoice)
             {
                 case BattleEntity.TurnChoice.Attack:  // 1. Attack
-                    turnInfo = attackHandler(ref oppTeam);
+                    turnInfo = attackHandler(ref oppTeam, moveChoice);
                     break;
 
                 case BattleEntity.TurnChoice.Guard:  // 2. Guard
@@ -121,7 +121,7 @@ public class BattleEntity : MonoBehaviour
 
     // attackHandler Function, maps correct attack function for different entities
     // Returns a turn's info
-    public string attackHandler(ref List<BattleEntity> oppTeam) // CHANGE NAME TO ATTACK HANDLER
+    public string attackHandler(ref List<BattleEntity> oppTeam, int moveChoice) // CHANGE NAME TO ATTACK HANDLER
     {
         string turnInfo;
 
@@ -129,7 +129,7 @@ public class BattleEntity : MonoBehaviour
         if(entityType == EntityType.Enemy)
             turnInfo = performAttackNPC(ref oppTeam);
         else
-            turnInfo = performAttackPlayer(ref oppTeam);
+            turnInfo = performAttackPlayer(ref oppTeam, moveChoice);
 
         return turnInfo;
     }
@@ -137,14 +137,14 @@ public class BattleEntity : MonoBehaviour
     // Handles attack logic for players who can choose their moves
     // uses MP, calculates dmg, asks entities to take damage
     // returns a turn's info
-    public string performAttackPlayer(ref List<BattleEntity> oppTeam)
+    public string performAttackPlayer(ref List<BattleEntity> oppTeam, int moveChoice)
     {
         // Return info
         string turnInfo;
 
         // Ask for move 0 or 1 <use buttons>
         // DIFF BUTTONS FOR BOSS AND PLAYER, USE DIFF FUNCTIONS
-        int moveChoice = UnityEngine.Random.Range(0, 1); 
+        // int moveChoice = UnityEngine.Random.Range(0, 1); 
 
         // MP Management
         if (cMP >= moves[moveChoice].mpCost)

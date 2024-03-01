@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using static BattleEntity;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.UIElements;
+using System;
 
 public class BattleManager : MonoBehaviour
 {
@@ -41,21 +42,53 @@ public class BattleManager : MonoBehaviour
     string battleOrderString;
     public TMP_Text playerStatsTextObject;
     string playerStatsString = "Party Stats: \n";
-    
+
     // Button Management
+    int currSelection;
+    List<int> validInputs;
+    enum ButtonMenu
+    {
+        Main,
+        Fight,
+        Players,
+        Heal
+    } ButtonMenu currMode;
+
+    enum MainMenu
+    {
+        Fight,
+        Guard,
+        Heal,
+        Escape
+    }
+
+    enum FightMenu
+    {
+        Targeted = 2,
+        Sweeping = 3
+    }
+
+    enum HealMenu
+    {
+        HP = 2,
+        MP = 3
+    }
+
     public TMP_Text turnIndicator;
-    public UnityEngine.UI.Button attackButton;
-    public UnityEngine.UI.Button guardButton;
-    public UnityEngine.UI.Button healButton;
+    public TMP_Text selector;
+    public TMP_Text opt1;
+    public TMP_Text opt2;
+    public TMP_Text opt3;
+    public TMP_Text opt4;
+    private bool playerIsSelecting = true;
     List<UnityEngine.UI.Button> turnButtons = new List<UnityEngine.UI.Button>();
-    bool attackClicked = false;
-    bool guardClicked = false;
-    bool healClicked = false;
-    bool checkingForButtons = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        // Set Button texts and initiialisations based on which screen we are in
+        SetMenu(ButtonMenu.Main);
+
         // Spawn a scene with x entities
         initialiseBattle(EnemyType.Dwarf, 4); // only minions
         // initialiseBattle(BossName.Hephaestus); // only boss
@@ -64,9 +97,9 @@ public class BattleManager : MonoBehaviour
         entityCount = allEntities.Count;
 
         // Disable turn choice buttons
-        turnButtons.Add(attackButton);
-        turnButtons.Add(guardButton);
-        turnButtons.Add(healButton);
+        //turnButtons.Add(attackButton);
+        //turnButtons.Add(guardButton);
+        //turnButtons.Add(healButton);
 
         foreach(UnityEngine.UI.Button button in turnButtons)
         {
@@ -79,12 +112,14 @@ public class BattleManager : MonoBehaviour
         battleOrderTextObject.SetText(battleOrderString);
 
         // Start combat
-        // turnManager();
+        StartCoroutine(turnManager());
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        HandleKeyboardInput();
         /*
         if(checkingForButtons)
         {
@@ -100,6 +135,150 @@ public class BattleManager : MonoBehaviour
 
         }
         */
+    }
+
+    private void SetMenu(ButtonMenu Mode)
+    {
+        currMode = Mode;
+
+        if (Mode == ButtonMenu.Main)
+        {
+            validInputs = new List<int> { 0, 1, 2, 3 };
+            selector.alignment = TextAlignmentOptions.TopLeft;
+            currSelection = 0;
+
+            opt1.text = "Fight";
+            opt2.text = "Heal";
+            opt3.text = "Guard";
+            opt4.text = "Run Away";
+
+        } else
+        {
+            validInputs = new List<int> { 2, 3 };
+            selector.alignment = TextAlignmentOptions.TopRight;
+            currSelection = 2;
+
+            opt1.text = "";
+            opt2.text = "";
+
+            if (Mode == ButtonMenu.Fight)
+            {
+
+                opt3.text = "Targeted";
+                opt4.text = "Sweeping";
+
+            } else // ButtonMenu.Heal
+            {
+
+                opt3.text = "Heal HP";
+                opt4.text = "Heal MP";
+
+            }
+        }
+    }
+
+    private void HandleKeyboardInput()
+    {
+
+        if (Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Return))
+            ChangeMenu();
+
+        if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            currSelection += 2;                         // right arrow is equivalent to incrementing the selection int by 2
+            if (IsValid(currSelection))
+                UpdateSelector();
+            else
+                currSelection -= 2;                     // undo if not valid
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+            currSelection -= 2;                         // left arrow is equivalent to decrementing the selection int by 2
+            if (IsValid(currSelection))
+                UpdateSelector();
+            else
+                currSelection += 2;                     // undo if not valid
+        }
+
+        if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            currSelection += 1;                         // down arrow is equivalent to incrementing the selection int by 1
+            if (IsValid(currSelection))
+                UpdateSelector();
+            else
+                currSelection -= 1;                     // undo if not valid
+        }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            currSelection -= 1;                         // up arrow is equivalent to decrementing the selection int by 1
+            if (IsValid(currSelection))
+                UpdateSelector();
+            else
+                currSelection += 1;                     // undo if not valid
+        }
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+            ChangeMenu(esc_flg: true);
+
+    }
+
+    private bool IsValid(int ButtonIndex)
+    {
+        if (validInputs.Contains(ButtonIndex))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    private void UpdateSelector()
+    {
+        if (currSelection == 0)
+            selector.alignment = TextAlignmentOptions.TopLeft;
+        else if (currSelection == 1)
+            selector.alignment = TextAlignmentOptions.BottomLeft;
+        else if (currSelection == 2)
+            selector.alignment = TextAlignmentOptions.TopRight;
+        else if (currSelection == 3)
+            selector.alignment = TextAlignmentOptions.BottomRight;
+    }
+
+    private void ChangeMenu(bool esc_flg = false)
+    {
+        if (esc_flg)
+            SetMenu(ButtonMenu.Main);
+        else if (currMode == ButtonMenu.Main)
+        {
+            if (currSelection == 0)
+                SetMenu(ButtonMenu.Fight);
+            else if (currSelection == 1)
+                SetMenu(ButtonMenu.Heal);
+            else if (currSelection == 2)
+            {
+                /* SKIP, NO OPTIONS */
+            }
+            else if (currSelection == 3)
+            {
+                /* [TODO] EXIT BATTLE SCREEN */
+            }
+        }
+        else if (currMode  == ButtonMenu.Fight)
+        {
+            if (currSelection == 2)
+            {
+                Debug.Log("GOT HERE");
+                SetMenu(ButtonMenu.Players);
+            }
+            else if (currSelection == 3)
+            {
+                playerIsSelecting = false;
+            }
+        }
     }
 
     // Sets up a basic battle scene with given list of enemies and players
@@ -238,7 +417,7 @@ public class BattleManager : MonoBehaviour
     }
 
     // turnManager function, uses sorted entity order to initiate turns for each battle entity
-    void turnManager()
+    IEnumerator turnManager()
     {
         // Entity management
         BattleEntity currEntity;
@@ -284,14 +463,10 @@ public class BattleManager : MonoBehaviour
             }
             else
             {
-                enableButtons(); // transfer control to update and wait for it to call entity's turn handler with the input
-                // but then how will control come back here?!
+                yield return StartCoroutine(WaitForPlayerInput());      // plain wrapper around an empty while loop to make sure the variables used below don't contain dummy/old values
+                Debug.Log("REACHED");
+                currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, 1);
             }
-
-            // Reset clicked buttons
-            attackClicked = false;
-            guardClicked = false;
-            healClicked = false;
 
             // Manage entitities with multiple turns
             currEntity.turnsLeft--;
@@ -378,35 +553,17 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Combat has ended.");
     }
 
+    private IEnumerator WaitForPlayerInput()
+    {
+        while (playerIsSelecting)
+        {
+            yield return null;
+        }
+    }
+
     // Calls functions based on turn choice for given entity
     // getTurnChoice
     // Called by playable entity to display buttons and get turn choice
-    public void enableButtons()
-    {
-        // Display all buttons
-        foreach (UnityEngine.UI.Button button in turnButtons)
-        {
-            button.interactable = true;
-        }
-
-        // Wait for player to click one, the corresponding function to be called
-        checkingForButtons = true;
-
-        // Return value based on whichever was clicked first
-        /*
-        while (global turnChoice variable is null)
-        {
-            if not null, return turnChoice
-
-            if (attackClicked)
-                return BattleEntity.TurnChoice.Attack;
-            else if (guardClicked)
-                return BattleEntity.TurnChoice.Guard;
-            else if (healClicked)
-                return BattleEntity.TurnChoice.Heal;
-        }
-        */
-    }
 
     //BattleEntity.TurnChoice checkForButtonClick()
     //{
@@ -417,24 +574,6 @@ public class BattleManager : MonoBehaviour
     //    else if (healClicked)
     //        return BattleEntity.TurnChoice.Heal;
     //}
-
-
-    // Called when corresponding buttons are clicked
-    public void attackButtonClick()
-    {
-        attackClicked = true;
-        Debug.Log("Attack Button was clicked");
-    }
-    public void guardButtonClick()
-    {
-        guardClicked = true;
-        Debug.Log("Guard Button was clicked");
-    }
-    public void healButtonClick()
-    {
-        healClicked = true;
-        Debug.Log("Heal Button was clicked");
-    }
 
     // reviveTheFallen, Revives dead party members to x% of their mHP and mMP
     void reviveTheFallen(PartyMember deadPartyMember)
