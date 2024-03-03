@@ -119,7 +119,7 @@ public class DialogueManager : MonoBehaviour
         // Access npc's kingdom (temp)
         Kingdom kingdom = currentTrigger.locationKingdom;
         // Text input = inputField.GetComponent<Text>(); // THIS DOES NOT WORK RN
-        Input = "BLAH";
+        string input = "BLAH";
 
         if(input == passwordList[kingdom])
         {
