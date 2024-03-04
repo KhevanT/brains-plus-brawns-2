@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
@@ -24,6 +25,7 @@ public class DialogueManager : MonoBehaviour
         {Kingdom.GICT, "Hephaestus" },
         {Kingdom.AMSOM, "Jeff Bezos" },
         {Kingdom.SAS, "Marie Curie" },
+        {Kingdom.BATTLE, "FIGHT" }
     };
     GameObject passwordObject;
 
@@ -82,10 +84,15 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = false;
         SetChildren(false);              // Makes the UI invisible when dialogue ends
 
-        if(currentTrigger.isGateKeeper) 
+        if(/*currentTrigger.isGateKeeper*/true) 
         {
+            Debug.Log("");
             // Load corresponding scene
-            Debug.Log("Loading next kingdom");
+            if (currentTrigger.locationKingdom == Kingdom.GICT)
+                SceneManager.LoadScene("Volcano Kingdom");
+
+            if (currentTrigger.locationKingdom == Kingdom.BATTLE)
+                SceneManager.LoadScene("BattleScene");
         }
     }
 

@@ -5,7 +5,16 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Overworld Main.unity
+    guid: fa231f011f94b0a47ba5d62c290a279b
+  - enabled: 1
+    path: Assets/Scenes/Volcano Kingdom.unity
+    guid: acfbe6576801ac544ac87d2c56949068
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 809dd6b80c6ef914bbd0f80e874e91fb
   m_configObjects: {}
