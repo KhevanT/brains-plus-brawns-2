@@ -20762,6 +20762,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: GICT Gate NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[2].line
+      value: You shall go forth!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[2].name
+      value: Gatekeeper
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[1].isGate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[2].isAfterGate
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8536260636706313109, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -21398,11 +21418,13 @@ MonoBehaviour:
   isGateKeeper: 1
   isPasswordCorrect: 0
   dialogue:
-  - isTriggerToGate: 0
+  - isGate: 0
+    isAfterGate: 0
     name: Gatekeeper
     line: Who are you, outsider? If you wish to enter the SAS Kingdom, you must tell
       us the secret password
-  - isTriggerToGate: 0
+  - isGate: 0
+    isAfterGate: 0
     name: Gatekeeper
     line: I am awaiting your response
 --- !u!114 &9067401585572213484
@@ -21421,11 +21443,13 @@ MonoBehaviour:
   isGateKeeper: 1
   isPasswordCorrect: 0
   dialogue:
-  - isTriggerToGate: 0
+  - isGate: 0
+    isAfterGate: 0
     name: Gatekeeper
     line: Who are you, outsider? If you wish to enter the AMSOM Kingdom, you must
       tell us the secret password
-  - isTriggerToGate: 0
+  - isGate: 0
+    isAfterGate: 0
     name: Gatekeeper
     line: I am awaiting your response
 --- !u!1660057539 &9223372036854775807
