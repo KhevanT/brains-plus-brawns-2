@@ -403,7 +403,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8536260636706313109}
   - component: {fileID: 6702921829252020221}
-  - component: {fileID: 2084665133421331671}
   m_Layer: 7
   m_Name: Gate NPC
   m_TagString: NPC
@@ -452,22 +451,6 @@ MonoBehaviour:
   - isTriggerToGate: 0
     name: Gatekeeper
     line: I am awaiting your response
---- !u!114 &2084665133421331671
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5137881955710830927}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cb4222a02614b47ba27ff8bde8b478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationKingdom: 0
-  isGateKeeper: 0
-  isPasswordCorrect: 0
-  dialogue: []
 --- !u!1 &7579895049276126636
 GameObject:
   m_ObjectHideFlags: 0

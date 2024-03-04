@@ -87,7 +87,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3234801279961219592}
   - component: {fileID: 8725789988106204603}
-  - component: {fileID: 6901164441200874636}
   m_Layer: 7
   m_Name: Signpost NPC
   m_TagString: NPC
@@ -131,22 +130,6 @@ MonoBehaviour:
   - isTriggerToGate: 0
     name: Signpost
     line: Be wary, you are about to enter the land of the undead
---- !u!114 &6901164441200874636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6117807735235070736}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cb4222a02614b47ba27ff8bde8b478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationKingdom: 0
-  isGateKeeper: 0
-  isPasswordCorrect: 0
-  dialogue: []
 --- !u!1 &8514944217942465781
 GameObject:
   m_ObjectHideFlags: 0

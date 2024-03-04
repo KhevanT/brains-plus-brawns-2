@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,7 +25,7 @@ public class DialogueManager : MonoBehaviour
         {Kingdom.AMSOM, "Jeff Bezos" },
         {Kingdom.SAS, "Marie Curie" },
     };
-
+    GameObject passwordObject;
 
     private void SetChildren(bool activeStat)
     {
@@ -34,42 +35,17 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public IEnumerator StartDialogue(DialogueTrigger trigger, List<DialogueLine> dialogue)
+    public void StartDialogue(DialogueTrigger trigger, List<DialogueLine> dialogue)
     {
         currentTrigger = trigger;
+        passwordObject = currentTrigger.GetPasswordObject();
 
         isDialogueActive = true;
 
         SetChildren(true);              // Makes the UI visible when dialogue starts
 
         foreach (DialogueLine line in dialogue)
-        {
-            currentLine = line;
-            if(line.isTriggerToGate)
-            {
-                // Enable password child, then make it child of canvas to make it visible
-                GameObject passwordObject = trigger.GetPasswordObject();
-                Debug.Log(passwordObject);
-                passwordObject.SetActive(true);
-                passwordObject.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
-                Debug.Log("Asking for GICT password");
-
-                // Take input from field, check if its correct
-                while (!currentTrigger.isPasswordCorrect)
-                {
-                    yield return null;
-                }
-
-                // Allow players to exit dialogue if they don't want to enter this kingdom rn
-                // EndDialogue();
-
-                // Disable passsword after done
-                passwordObject.SetActive(false);
-
-            }
-
             lines.Enqueue(line);
-        }
 
         DisplayNextDialogueLine();
     }
@@ -82,7 +58,7 @@ public class DialogueManager : MonoBehaviour
             return;
         }
 
-        DialogueLine currentLine = lines.Dequeue();
+        currentLine = lines.Dequeue();
 
         characterName.text = currentLine.name;
 
@@ -114,17 +90,19 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Reads password and verifies, for entry into kingdom using gate
-    public void ReadPassword()
+    public void ReadPassword(GameObject inputField)
     {
         // Access npc's kingdom (temp)
         Kingdom kingdom = currentTrigger.locationKingdom;
-        // Text input = inputField.GetComponent<Text>(); // THIS DOES NOT WORK RN
-        string input = "BLAH";
+        string input = inputField.GetComponent<TMP_InputField>().text;
+        Debug.Log(input);
+        //string input = "BLAH";
 
         if(input == passwordList[kingdom])
         {
             Debug.Log("Password is correct");
             currentTrigger.isPasswordCorrect = true;
+            passwordObject.SetActive(false);
         }
         else
         {
@@ -139,9 +117,34 @@ public class DialogueManager : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && !currentLine.isTriggerToGate)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            DisplayNextDialogueLine();
+            Debug.Log(currentLine.isGate + ", " +  currentLine.isAfterGate + ", " + currentTrigger.isPasswordCorrect);
+
+            if (currentLine.isGate)
+            {
+                // Enable password child, then make it child of canvas to make it visible
+                Debug.Log(passwordObject);
+                passwordObject.SetActive(true);
+                passwordObject.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
+                ReadPassword(passwordObject);
+                Debug.Log("Asking for GICT password");
+
+                // Allow players to exit dialogue if they don't want to enter this kingdom rn
+                // EndDialogue();
+
+                // Disable passsword after done
+                // passwordObject.SetActive(false);
+            }
+
+            if (!currentLine.isGate && !currentLine.isAfterGate)
+            {
+                DisplayNextDialogueLine();
+            }
+            else if (currentTrigger.isPasswordCorrect)
+            {
+                DisplayNextDialogueLine();
+            }
         }
     }
 }

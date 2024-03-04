@@ -140,7 +140,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8106100771538146789}
   - component: {fileID: 9067401583787540823}
-  - component: {fileID: 53697174732360324}
   m_Layer: 7
   m_Name: NPC
   m_TagString: NPC
@@ -190,22 +189,6 @@ MonoBehaviour:
   - isTriggerToGate: 0
     name: Player
     line: Oh, great! I'll keep that in mind.
---- !u!114 &53697174732360324
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5863877526476458612}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 90cb4222a02614b47ba27ff8bde8b478, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  locationKingdom: 0
-  isGateKeeper: 0
-  isPasswordCorrect: 0
-  dialogue: []
 --- !u!1 &7901120025423725924
 GameObject:
   m_ObjectHideFlags: 0

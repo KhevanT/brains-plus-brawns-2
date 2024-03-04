@@ -5,7 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class DialogueLine
 {
-    public bool isTriggerToGate = false;
+    public bool isGate = false;
+    public bool isAfterGate = false;
     public string name;
     [TextArea(3, 10)]
     public string line;
@@ -20,7 +21,7 @@ public class DialogueTrigger : MonoBehaviour
 
     public void TriggerDialogue()
     {
-        StartCoroutine(GameObject.FindGameObjectWithTag("Dialogue Manager").GetComponent<DialogueManager>().StartDialogue(this, dialogue));
+        GameObject.FindGameObjectWithTag("Dialogue Manager").GetComponent<DialogueManager>().StartDialogue(this, dialogue);
     }
 
     public GameObject GetPasswordObject()
