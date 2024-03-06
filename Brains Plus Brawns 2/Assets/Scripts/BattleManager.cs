@@ -21,6 +21,7 @@ public class BattleManager : MonoBehaviour
     // Entity management
     int entityCount;
     List<BattleEntity> allEntities = new List<BattleEntity>();
+    BattleEntity currEntity;
     List<BattleEntity> playerPartyMemberComponents  = new List<BattleEntity>();
     List<BattleEntity> enemyPartyComponents = new List<BattleEntity>();
 
@@ -44,7 +45,9 @@ public class BattleManager : MonoBehaviour
     string playerStatsString = "Party Stats: \n";
 
     // Button Management
+    int mvC;
     int currSelection;
+    TurnChoice currChoice;
     List<int> validInputs;
     enum ButtonMenu
     {
@@ -90,8 +93,8 @@ public class BattleManager : MonoBehaviour
         SetMenu(ButtonMenu.Main);
 
         // Spawn a scene with x entities
-        initialiseBattle(EnemyType.Dwarf, 4); // only minions
-        // initialiseBattle(BossName.Hephaestus); // only boss
+        // initialiseBattle(EnemyType.Dwarf, 4); // only minions
+        initialiseBattle(BossName.Hephaestus); // only boss
         allEntities.AddRange(playerPartyMemberComponents);
         allEntities.AddRange(enemyPartyComponents);
         entityCount = allEntities.Count;
@@ -152,6 +155,46 @@ public class BattleManager : MonoBehaviour
             opt3.text = "Guard";
             opt4.text = "Run Away";
 
+        } else if (Mode == ButtonMenu.Players)
+        {
+            selector.alignment = TextAlignmentOptions.TopLeft;
+            if (!currEntity.alive)
+            {
+                // pass because entity isn't alive
+                return;
+            }
+
+            int totalOppSize = 0;
+            TMP_Text[] texts = new TMP_Text[] { opt1, opt2, opt3, opt4 };
+            validInputs = new List<int> {};
+
+            if (currEntity.entityType == EntityType.PartyMember)
+            {
+                for (int i = 0; i < enemyPartyComponents.Count; ++i)
+                {
+                    if (enemyPartyComponents[i].alive)
+                    {
+                        validInputs.Add(totalOppSize);
+                        texts[totalOppSize++].text = enemyPartyComponents[i].entityName;
+                    }
+                    else
+                        texts[totalOppSize++].text = "";
+                }
+
+            } else if (currEntity.entityType == EntityType.Boss)
+            {
+                for (int i = 0; i < playerPartyMemberComponents.Count; ++i)
+                {
+                    if (playerPartyMemberComponents[i].alive)
+                    {
+                        validInputs.Add(totalOppSize);
+                        texts[totalOppSize++].text = playerPartyMemberComponents[i].entityName;
+                    }
+                    else
+                        texts[totalOppSize++].text = "";
+                }
+            }
+
         } else
         {
             validInputs = new List<int> { 2, 3 };
@@ -167,7 +210,7 @@ public class BattleManager : MonoBehaviour
                 opt3.text = "Targeted";
                 opt4.text = "Sweeping";
 
-            } else // ButtonMenu.Heal
+            } else if (Mode == ButtonMenu.Heal)
             {
 
                 opt3.text = "Heal HP";
@@ -261,23 +304,46 @@ public class BattleManager : MonoBehaviour
             else if (currSelection == 2)
             {
                 /* SKIP, NO OPTIONS */
+                currChoice = TurnChoice.Guard;
+                /* Guard and end attack */
             }
             else if (currSelection == 3)
             {
                 /* [TODO] EXIT BATTLE SCREEN */
+                /* [TODO] CHANGE SCENE BACK TO THE PREVIOUS SCENE */
             }
         }
         else if (currMode  == ButtonMenu.Fight)
         {
+            currChoice = TurnChoice.Attack;
             if (currSelection == 2)
             {
-                Debug.Log("GOT HERE");
                 SetMenu(ButtonMenu.Players);
             }
             else if (currSelection == 3)
             {
+                mvC = 0;
                 playerIsSelecting = false;
             }
+        }
+        else if (currMode == ButtonMenu.Heal)
+        {
+            currChoice = TurnChoice.Heal;
+            if (currSelection == 2)
+            {
+                // Heal HP and end turn
+                playerIsSelecting = false;
+            }
+            else if (currSelection == 3)
+            {
+                // Heal MP and end turn
+                playerIsSelecting = false;
+            }
+        }
+        else if (currMode == ButtonMenu.Players)
+        {
+            mvC = 1;
+            playerIsSelecting = false;
         }
     }
 
@@ -364,7 +430,7 @@ public class BattleManager : MonoBehaviour
             PartyMember playerComponent = emptyPlayer.GetComponent<PartyMember>();
             playerComponent.initialiseMember(playerNames[i], playerClasses[i]);
             emptyPlayer.name = playerComponent.baseClass.ToString();
-
+            
             playerPartyMemberComponents.Add(playerComponent);
 
             // Set cHP, cMP to previously stored (if -1, it remains at maxHP and maxMP as per initialisation)
@@ -420,7 +486,6 @@ public class BattleManager : MonoBehaviour
     IEnumerator turnManager()
     {
         // Entity management
-        BattleEntity currEntity;
         bool partyDead = false;
         bool enemyDead = false;
 
@@ -432,7 +497,10 @@ public class BattleManager : MonoBehaviour
         Debug.Log("Current Round: " + curRound);
         while(!partyDead && !enemyDead)
         {
+            yield return new WaitForSecondsRealtime(2);
             currEntity = allEntities[currentTurn];
+            if (currEntity.entityType == EntityType.PartyMember)
+                playerIsSelecting = true;
             turnIndicator.SetText(currEntity.entityName + "'s Turn: ");
 
             /*
@@ -456,17 +524,8 @@ public class BattleManager : MonoBehaviour
                 currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
             }
             */
-
-            if (currEntity.entityType == BattleEntity.EntityType.Enemy) // enemies
-            {
-                currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
-            }
-            else
-            {
-                yield return StartCoroutine(WaitForPlayerInput());      // plain wrapper around an empty while loop to make sure the variables used below don't contain dummy/old values
-                Debug.Log("REACHED");
-                currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, 1);
-            }
+            yield return StartCoroutine(executeMoveChoice());
+            
 
             // Manage entitities with multiple turns
             currEntity.turnsLeft--;
@@ -474,6 +533,7 @@ public class BattleManager : MonoBehaviour
             {
                 turnIndicator.SetText(currEntity.entityName + "'s Second Turn: ");
 
+                yield return StartCoroutine(executeMoveChoice());
                 //TurnChoice turnChoice = getTurnChoice();
                 //// TurnChoice turnChoice = TurnChoice.Attack;
                 //currEntity.turnHandler(turnChoice, ref playerPartyMemberComponents); // bosses only
@@ -555,9 +615,38 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator WaitForPlayerInput()
     {
-        while (playerIsSelecting)
+        Debug.Log(playerIsSelecting + " " + currEntity.alive);
+        while (playerIsSelecting && currEntity.alive)
         {
             yield return null;
+        }
+        Debug.Log(playerIsSelecting + " " + currEntity.alive);
+    }
+
+    private IEnumerator executeMoveChoice()
+    {
+        if (currEntity.entityType == EntityType.PartyMember)
+            yield return StartCoroutine(WaitForPlayerInput());      // plain wrapper around an empty while loop to make sure the variables used below don't contain dummy/old values
+
+        if (currChoice == TurnChoice.Attack)                                                    // [TODO] Update iski value
+        {
+            if (currEntity.entityType == EntityType.Enemy || currEntity.entityType == EntityType.Boss) // enemies
+            {
+                currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
+                ChangeMenu(esc_flg: true);
+            }
+            else
+            {
+                currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, mvC, currSelection);
+            }
+
+        } else if (currChoice == TurnChoice.Heal)
+        {
+            currEntity.turnHandler(TurnChoice.Heal, ref enemyPartyComponents);
+
+        } else if (currChoice == TurnChoice.Guard)
+        {
+            currEntity.turnHandler(TurnChoice.Guard, ref enemyPartyComponents);
         }
     }
 

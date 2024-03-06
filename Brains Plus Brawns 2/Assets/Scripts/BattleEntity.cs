@@ -74,7 +74,7 @@ public class BattleEntity : MonoBehaviour
     }
     
     // Calls functions based on turn choice
-    public void turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam, int moveChoice=0)
+    public void turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam, int moveChoice=0, int oppIndex=0)
     {
         if(!alive)
         {
@@ -98,7 +98,7 @@ public class BattleEntity : MonoBehaviour
             switch (turnChoice)
             {
                 case BattleEntity.TurnChoice.Attack:  // 1. Attack
-                    turnInfo = attackHandler(ref oppTeam, moveChoice);
+                    turnInfo = attackHandler(ref oppTeam, moveChoice, oppIndex);
                     break;
 
                 case BattleEntity.TurnChoice.Guard:  // 2. Guard
@@ -110,7 +110,7 @@ public class BattleEntity : MonoBehaviour
                         turnInfo = performHeal();
                     else
                         Debug.Log("Out of potions, or health is at maximum. Choose turn again.");
-                    turnHandler(turnChoice, ref oppTeam); // NEED TO GET TURN CHOICE AGAIN! 
+                    // turnHandler(turnChoice, ref oppTeam); // NEED TO GET TURN CHOICE AGAIN! 
                     break;
             }
             Debug.Log(turnInfo);
@@ -121,7 +121,7 @@ public class BattleEntity : MonoBehaviour
 
     // attackHandler Function, maps correct attack function for different entities
     // Returns a turn's info
-    public string attackHandler(ref List<BattleEntity> oppTeam, int moveChoice) // CHANGE NAME TO ATTACK HANDLER
+    public string attackHandler(ref List<BattleEntity> oppTeam, int moveChoice, int oppIndex) // CHANGE NAME TO ATTACK HANDLER
     {
         string turnInfo;
 
@@ -129,7 +129,7 @@ public class BattleEntity : MonoBehaviour
         if(entityType == EntityType.Enemy)
             turnInfo = performAttackNPC(ref oppTeam);
         else
-            turnInfo = performAttackPlayer(ref oppTeam, moveChoice);
+            turnInfo = performAttackPlayer(ref oppTeam, moveChoice, oppIndex);
 
         return turnInfo;
     }
@@ -137,7 +137,7 @@ public class BattleEntity : MonoBehaviour
     // Handles attack logic for players who can choose their moves
     // uses MP, calculates dmg, asks entities to take damage
     // returns a turn's info
-    public string performAttackPlayer(ref List<BattleEntity> oppTeam, int moveChoice)
+    public string performAttackPlayer(ref List<BattleEntity> oppTeam, int moveChoice, int oppIndex)
     {
         // Return info
         string turnInfo;
@@ -155,27 +155,21 @@ public class BattleEntity : MonoBehaviour
             // Calculate and deal damage according to move type
             if (moves[moveChoice].type == Move.MoveType.Target) // 1. Target move
             {
-                // Ask for random, alive target <random temporary>
-                int rng;
-                do
-                {
-                    rng = UnityEngine.Random.Range(0, oppTeam.Count);
-                } while (!oppTeam[rng].alive);
-
                 // Calculate damage for this randomly selected entity
-                int dmg = calculateDMG(oppTeam[rng], moves[moveChoice]);
+                int dmg = calculateDMG(oppTeam[oppIndex], moves[moveChoice]);
 
                 // Ask player to receive damage (guard breaking, death, all handled inside takeDMG)
                 // POTENTIAL PROBLEM: since guard break & faint will be stated before turn info, sequence of logs may be screwed up
-                oppTeam[rng].takeDamage(dmg);
+                oppTeam[oppIndex].takeDamage(dmg);
 
                 // Turn info for 1 target
                 turnInfo = entityName + " used " + moves[moveChoice].name
-                    + " on " + oppTeam[rng].entityName
+                    + " on " + oppTeam[oppIndex].entityName
                     + " and dealt " + dmg + " points of damage";
             }
             else // 2. Sweeping move
             {
+                Debug.Log("SWEEPING MOVE");
                 // Save victim info
                 string oppList = "";
                 string dmgList = "";
