@@ -51,5 +51,7 @@ public class BattleEnemy : BattleEntity
 // Enumeration for all enemy variety
 public enum EnemyType
 {
-    Dwarf
+    Dwarf,
+    Skeleton,
+    Jester
 }

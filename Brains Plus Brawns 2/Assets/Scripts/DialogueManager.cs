@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     // Password List
     Dictionary<Kingdom, string> passwordList = new Dictionary<Kingdom, string>
     {
-        {Kingdom.GICT, "Hephaestus" },
+        {Kingdom.GICT, "Greece" },
         {Kingdom.AMSOM, "Jeff Bezos" },
         {Kingdom.SAS, "Marie Curie" },
         {Kingdom.BATTLE, "FIGHT" }
@@ -103,7 +103,6 @@ public class DialogueManager : MonoBehaviour
         Kingdom kingdom = currentTrigger.locationKingdom;
         string input = inputField.GetComponent<TMP_InputField>().text;
         Debug.Log(input);
-        //string input = "BLAH";
 
         if(input == passwordList[kingdom])
         {
