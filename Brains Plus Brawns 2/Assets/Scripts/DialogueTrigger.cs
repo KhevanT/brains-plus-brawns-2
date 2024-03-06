@@ -19,6 +19,15 @@ public class DialogueTrigger : MonoBehaviour
     public bool isPasswordCorrect = false;
     [SerializeField] public List<DialogueLine> dialogue;
 
+    public bool isBattleTrigger = false;
+    public bool isBossFight = false;
+    public int enemyCount = 0;
+    public BossName bossName;
+    public EnemyType enemyType;
+
+    public bool isStaircase = false;
+    public GameObject nextStaircase;
+
     public void TriggerDialogue()
     {
         GameObject.FindGameObjectWithTag("Dialogue Manager").GetComponent<DialogueManager>().StartDialogue(this, dialogue);

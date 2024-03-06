@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
     // Password List
     Dictionary<Kingdom, string> passwordList = new Dictionary<Kingdom, string>
     {
-        {Kingdom.GICT, "Hephaestus" },
+        {Kingdom.GICT, "Greece" },
         {Kingdom.AMSOM, "Jeff Bezos" },
         {Kingdom.SAS, "Marie Curie" },
         {Kingdom.BATTLE, "FIGHT" }
@@ -84,15 +84,27 @@ public class DialogueManager : MonoBehaviour
         isDialogueActive = false;
         SetChildren(false);              // Makes the UI invisible when dialogue ends
 
-        if(/*currentTrigger.isGateKeeper*/true) 
+        if(currentTrigger.isGateKeeper) 
         {
-            Debug.Log("");
             // Load corresponding scene
             if (currentTrigger.locationKingdom == Kingdom.GICT)
                 SceneManager.LoadScene("Volcano Kingdom");
+        }
 
-            if (currentTrigger.locationKingdom == Kingdom.BATTLE)
-                SceneManager.LoadScene("BattleScene");
+        if (currentTrigger.isBattleTrigger)
+        {
+            SceneManager.LoadScene("BattleScene");
+        }
+            
+
+        if (currentTrigger.isStaircase)
+        {
+            // Change player position to target position
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            GameObject playerMovePoint = GameObject.FindGameObjectWithTag("Player Move Point");
+            
+            player.gameObject.transform.position = currentTrigger.nextStaircase.transform.position;
+            playerMovePoint.transform.position = currentTrigger.nextStaircase.transform.position;
         }
     }
 
@@ -103,7 +115,6 @@ public class DialogueManager : MonoBehaviour
         Kingdom kingdom = currentTrigger.locationKingdom;
         string input = inputField.GetComponent<TMP_InputField>().text;
         Debug.Log(input);
-        //string input = "BLAH";
 
         if(input == passwordList[kingdom])
         {
@@ -128,10 +139,9 @@ public class DialogueManager : MonoBehaviour
         {
             Debug.Log(currentLine.isGate + ", " +  currentLine.isAfterGate + ", " + currentTrigger.isPasswordCorrect);
 
-            if (currentLine.isGate)
+            if (currentLine.isGate && currentTrigger.isGateKeeper)
             {
                 // Enable password child, then make it child of canvas to make it visible
-                Debug.Log(passwordObject);
                 passwordObject.SetActive(true);
                 passwordObject.transform.SetParent(GameObject.FindGameObjectWithTag("Canvas").transform, true);
                 ReadPassword(passwordObject);
@@ -144,7 +154,7 @@ public class DialogueManager : MonoBehaviour
                 // passwordObject.SetActive(false);
             }
 
-            if (!currentLine.isGate && !currentLine.isAfterGate)
+            if ((!currentLine.isGate && !currentLine.isAfterGate) || currentTrigger.isBattleTrigger)
             {
                 DisplayNextDialogueLine();
             }

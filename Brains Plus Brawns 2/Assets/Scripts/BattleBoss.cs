@@ -57,5 +57,7 @@ public class BattleBoss : BattleEntity
 // Boss names
 public enum BossName
 {
-    Hephaestus
+    Hephaestus,
+    King,
+    Necromancer
 }
