@@ -20,12 +20,13 @@ public class DialogueTrigger : MonoBehaviour
     [SerializeField] public List<DialogueLine> dialogue;
 
     public bool isBattleTrigger = false;
+    public bool isBossFight = false;
     public int enemyCount = 0;
     public BossName bossName;
     public EnemyType enemyType;
 
     public bool isStaircase = false;
-    public Vector2 targetLocation = Vector2.zero;
+    public GameObject nextStaircase;
 
     public void TriggerDialogue()
     {

@@ -7,6 +7,7 @@ TagManager:
   - Dialogue Manager
   - NPC
   - Canvas
+  - Player Move Point
   layers:
   - Default
   - TransparentFX
