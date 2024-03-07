@@ -106,11 +106,10 @@ public class BattleEntity : MonoBehaviour
                     break;
 
                 case BattleEntity.TurnChoice.Heal:  // 3. Heal
-                    if (hpPotionCount > 0 && cHP != mHP)
-                        turnInfo = performHeal();
-                    else
-                        Debug.Log("Out of potions, or health is at maximum. Choose turn again.");
-                    // turnHandler(turnChoice, ref oppTeam); // NEED TO GET TURN CHOICE AGAIN! 
+                    if (moveChoice == 0)
+                        turnInfo = performHPHeal();
+                    else if (moveChoice == 1)
+                        turnInfo = performMPHeal();
                     break;
             }
             Debug.Log(turnInfo);
@@ -258,12 +257,23 @@ public class BattleEntity : MonoBehaviour
     }
 
     // Heal, replenishes HP, uses potions (needs inventory access)
-    public string performHeal()
+    public string performHPHeal()                                               // [TODO] Handle whether enough potions are there or not
     {
         string turnInfo;
 
         cHP += hpPotionReplenish;
         hpPotionCount--;
+
+        turnInfo = entityName + " healed themselves and restored upto" + hpPotionReplenish + "points of HP";
+        return turnInfo;
+    }
+
+    public string performMPHeal()                                               // [TODO] Handle whether enough potions are there or not
+    {
+        string turnInfo;
+
+        cMP += mpPotionReplenish;
+        mpPotionCount--;
 
         turnInfo = entityName + " healed themselves and restored upto" + hpPotionReplenish + "points of HP";
         return turnInfo;

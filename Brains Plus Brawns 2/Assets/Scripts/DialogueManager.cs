@@ -8,11 +8,13 @@ using UnityEngine.UI;
 
 public class DialogueManager : MonoBehaviour
 {
+    public List<GameObject> enemies = new List<GameObject>();
+
     public TextMeshProUGUI characterName;
     public TextMeshProUGUI dialogueArea;
 
     private Queue<DialogueLine> lines = new Queue<DialogueLine>();
-    DialogueTrigger currentTrigger = null;
+    public DialogueTrigger currentTrigger = null;
     DialogueLine currentLine = null;
 
     public bool isDialogueActive = false;
@@ -93,6 +95,11 @@ public class DialogueManager : MonoBehaviour
 
         if (currentTrigger.isBattleTrigger)
         {
+            if (!currentTrigger.isBossFight)
+                PersistenceManager.SetPersistentStateMinion(currentTrigger.enemyType, currentTrigger.enemyCount);
+            else
+                PersistenceManager.SetPersistentStateBoss(currentTrigger.bossName);
+            PersistentSceneManager.InitScene(SceneManager.GetActiveScene().name, transform.position, ref enemies, gameObject.name);
             SceneManager.LoadScene("BattleScene");
         }
             
@@ -106,6 +113,8 @@ public class DialogueManager : MonoBehaviour
             player.gameObject.transform.position = currentTrigger.nextStaircase.transform.position;
             playerMovePoint.transform.position = currentTrigger.nextStaircase.transform.position;
         }
+
+        currentTrigger = null;
     }
 
     // Reads password and verifies, for entry into kingdom using gate

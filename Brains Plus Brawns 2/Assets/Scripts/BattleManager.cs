@@ -8,6 +8,7 @@ using static BattleEntity;
 using static Unity.Burst.Intrinsics.X86.Avx;
 using UnityEngine.UIElements;
 using System;
+using UnityEngine.SceneManagement;
 
 public class BattleManager : MonoBehaviour
 {
@@ -93,8 +94,12 @@ public class BattleManager : MonoBehaviour
         SetMenu(ButtonMenu.Main);
 
         // Spawn a scene with x entities
-        // initialiseBattle(EnemyType.Dwarf, 4); // only minions
-        initialiseBattle(BossName.Hephaestus); // only boss
+
+        if (PersistenceManager.enemyId == PersistenceManager.PersistentEnemyId.Minion)
+            initialiseBattle(PersistenceManager.enemyType, PersistenceManager.enemyCount); // only minions
+        else
+            initialiseBattle(PersistenceManager.bossName); // only boss
+
         allEntities.AddRange(playerPartyMemberComponents);
         allEntities.AddRange(enemyPartyComponents);
         entityCount = allEntities.Count;
@@ -157,6 +162,7 @@ public class BattleManager : MonoBehaviour
 
         } else if (Mode == ButtonMenu.Players)
         {
+            currSelection = 0;
             selector.alignment = TextAlignmentOptions.TopLeft;
             if (!currEntity.alive)
             {
@@ -179,6 +185,12 @@ public class BattleManager : MonoBehaviour
                     }
                     else
                         texts[totalOppSize++].text = "";
+                }
+
+                if (enemyPartyComponents.Count < 4)                                         // Handle labels when initialised enemies are less than four and hence not all labels are updated
+                {
+                    for (int i = enemyPartyComponents.Count; i < 4; ++i)
+                        texts[i].text = "";
                 }
 
             } else if (currEntity.entityType == EntityType.Boss)
@@ -305,6 +317,7 @@ public class BattleManager : MonoBehaviour
             {
                 /* SKIP, NO OPTIONS */
                 currChoice = TurnChoice.Guard;
+                playerIsSelecting = false;
                 /* Guard and end attack */
             }
             else if (currSelection == 3)
@@ -322,7 +335,7 @@ public class BattleManager : MonoBehaviour
             }
             else if (currSelection == 3)
             {
-                mvC = 0;
+                mvC = 1;
                 playerIsSelecting = false;
             }
         }
@@ -332,11 +345,13 @@ public class BattleManager : MonoBehaviour
             if (currSelection == 2)
             {
                 // Heal HP and end turn
+                mvC = 0;
                 playerIsSelecting = false;
             }
             else if (currSelection == 3)
             {
                 // Heal MP and end turn
+                mvC = 1;
                 playerIsSelecting = false;
             }
         }
@@ -525,7 +540,7 @@ public class BattleManager : MonoBehaviour
             }
             */
             yield return StartCoroutine(executeMoveChoice());
-            
+            ChangeMenu(esc_flg: true);
 
             // Manage entitities with multiple turns
             currEntity.turnsLeft--;
@@ -534,6 +549,7 @@ public class BattleManager : MonoBehaviour
                 turnIndicator.SetText(currEntity.entityName + "'s Second Turn: ");
 
                 yield return StartCoroutine(executeMoveChoice());
+                ChangeMenu(esc_flg: true);
                 //TurnChoice turnChoice = getTurnChoice();
                 //// TurnChoice turnChoice = TurnChoice.Attack;
                 //currEntity.turnHandler(turnChoice, ref playerPartyMemberComponents); // bosses only
@@ -577,6 +593,8 @@ public class BattleManager : MonoBehaviour
             else if(enemyDead)
             {
                 Debug.Log("The players have won.");
+                PersistentSceneManager.DisableEnemyWithCurrIndex();
+                SceneManager.LoadScene(PersistentSceneManager.currScene);
             }
             else
             {
@@ -633,7 +651,6 @@ public class BattleManager : MonoBehaviour
             if (currEntity.entityType == EntityType.Enemy || currEntity.entityType == EntityType.Boss) // enemies
             {
                 currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
-                ChangeMenu(esc_flg: true);
             }
             else
             {
@@ -642,7 +659,7 @@ public class BattleManager : MonoBehaviour
 
         } else if (currChoice == TurnChoice.Heal)
         {
-            currEntity.turnHandler(TurnChoice.Heal, ref enemyPartyComponents);
+            currEntity.turnHandler(TurnChoice.Heal, ref enemyPartyComponents, mvC);
 
         } else if (currChoice == TurnChoice.Guard)
         {

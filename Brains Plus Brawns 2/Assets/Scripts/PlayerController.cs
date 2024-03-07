@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask CollisionLayer;
 
     private DialogueManager dialogueManager;
-    private DialogueTrigger nearbyNPCDialogue;
+    [SerializeField] private DialogueTrigger nearbyNPCDialogue;
 
     // Animation variables (may not need)
     public Animator animator;
@@ -94,11 +94,15 @@ public class PlayerController : MonoBehaviour
         Collider2D interactable = Physics2D.OverlapCircle(movePoint.position, 0.2f, CollisionLayer);
         if (interactable != null)
             nearbyNPCDialogue = interactable.gameObject.GetComponentInParent<DialogueTrigger>();
+        else
+            nearbyNPCDialogue = null;
+
+
     }
 
     private void InteractWithNPC()
     {
-        if (Input.GetKeyDown(KeyCode.E) && !dialogueManager.isDialogueActive)
+        if (Input.GetKeyDown(KeyCode.E) && nearbyNPCDialogue != null && !dialogueManager.isDialogueActive)
             nearbyNPCDialogue.TriggerDialogue();
     }
 }
