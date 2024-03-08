@@ -27,7 +27,8 @@ public class DialogueManager : MonoBehaviour
         {Kingdom.GICT, "Greece" },
         {Kingdom.AMSOM, "Jeff Bezos" },
         {Kingdom.SAS, "Marie Curie" },
-        {Kingdom.BATTLE, "FIGHT" }
+        {Kingdom.BATTLE, "FIGHT" },
+        {Kingdom.Demo, "Password" }
     };
     GameObject passwordObject;
 

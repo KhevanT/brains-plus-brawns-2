@@ -18,8 +18,9 @@ public class PlayerController : MonoBehaviour
     private DialogueManager dialogueManager;
     [SerializeField] private DialogueTrigger nearbyNPCDialogue;
 
-    // Animation variables (may not need)
-    public Animator animator;
+    // Sprite
+    SpriteRenderer spriteRenderer;
+    bool facingRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +34,9 @@ public class PlayerController : MonoBehaviour
 
         // Get the dialogue manager to later on check whether a dialogue is currently in play or not.
         dialogueManager = GameObject.FindGameObjectWithTag("Dialogue Manager").GetComponent<DialogueManager>();
+
+        // Get sprite renderer
+        spriteRenderer = GameObject.FindWithTag("Player Sprite").GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
@@ -58,6 +62,17 @@ public class PlayerController : MonoBehaviour
         {
             if (Mathf.Abs(horizontalInput) == 1f) // Update horizontal (X-axis) position
             {
+                if (horizontalInput <= 0)
+                {
+                    facingRight = false;
+                    spriteRenderer.flipX = false;
+                }
+                else
+                {
+                    facingRight = true;
+                    spriteRenderer.flipX = true;
+                }
+
                 Move(new Vector3(horizontalInput, 0, 0));
             }
             else if (Mathf.Abs(verticalInput) == 1f) // Update vertical (Y-axis) position 
@@ -96,8 +111,6 @@ public class PlayerController : MonoBehaviour
             nearbyNPCDialogue = interactable.gameObject.GetComponentInParent<DialogueTrigger>();
         else
             nearbyNPCDialogue = null;
-
-
     }
 
     private void InteractWithNPC()
