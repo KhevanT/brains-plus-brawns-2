@@ -2747,12 +2747,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: dialogue.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: dialogue.Array.data[0].line
-      value: Who are you, outsider? If you wish to enter the Demo Kingdom, you must
-        tell us the secret password
+      value: 'Who are you, outsider? '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[1].line
+      value: If you wish to enter the Demo Kingdom, you must tell us the secret password
       objectReference: {fileID: 0}
     - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: dialogue.Array.data[2].line
@@ -2763,11 +2766,23 @@ PrefabInstance:
       value: Gatekeeper
       objectReference: {fileID: 0}
     - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[3].line
+      value: You shall go forth!
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[3].name
+      value: Gatekeeper
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: dialogue.Array.data[1].isGate
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
       propertyPath: dialogue.Array.data[2].isAfterGate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6702921829252020221, guid: 00a290c20fccbe044886f5379070cb26, type: 3}
+      propertyPath: dialogue.Array.data[3].isAfterGate
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7579895049276126636, guid: 00a290c20fccbe044886f5379070cb26, type: 3}

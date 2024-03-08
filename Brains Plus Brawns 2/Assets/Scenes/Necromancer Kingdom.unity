@@ -1318,7 +1318,7 @@ PrefabInstance:
     - target: {fileID: 5637722940293302178, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -2094146576, guid: cc8f2917ef38c9449838b456d3313fee, type: 3}
+      objectReference: {fileID: 1644032849, guid: 3a5c3f3682f682c459ea1b5d2c870c1b, type: 3}
     - target: {fileID: 6117807735235070736, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: m_Name
       value: Jester NPC
@@ -3000,6 +3000,40 @@ PrefabInstance:
       propertyPath: isBossFight
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[0].line
+      value: Well well well, it isn't everyday a whole platoon of fresh bodies come
+        walking right to my doorstep!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[0].name
+      value: Necromancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[1].line
+      value: Now that you're here, maybe you could put your "Brains" to the test
+        and help me create my next mutant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[1].name
+      value: Necromancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[2].line
+      value: Or use your "Brawns" and become my next experiments >:)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[2].name
+      value: Necromancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[2].isGate
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5809123086367789973, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5
@@ -4047,7 +4081,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
+  m_BackGroundColor: {r: 0.15686275, g: 0.15686275, b: 0.15686275, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
