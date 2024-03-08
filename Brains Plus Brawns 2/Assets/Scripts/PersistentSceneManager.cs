@@ -93,5 +93,6 @@ public enum Kingdom
     GICT,
     AMSOM,
     SAS,
-    BATTLE
+    BATTLE,
+    Demo
 }

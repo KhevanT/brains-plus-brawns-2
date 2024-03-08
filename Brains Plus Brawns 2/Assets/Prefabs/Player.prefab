@@ -87,7 +87,7 @@ MonoBehaviour:
   CollisionLayer:
     serializedVersion: 2
     m_Bits: 256
-  animator: {fileID: 8807592771415299466}
+  nearbyNPCDialogue: {fileID: 0}
 --- !u!95 &8807592771415299466
 Animator:
   serializedVersion: 5
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2817352173930192127}
   m_Layer: 0
   m_Name: Player Sprite
-  m_TagString: Untagged
+  m_TagString: Player Sprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -182,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: 1690280853
   m_SortingLayer: 4
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 7433e19030b334f4bb78d7a795c0f59f, type: 3}
+  m_Sprite: {fileID: -927260813, guid: 89423180d21ca604194fcc8733d0921b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

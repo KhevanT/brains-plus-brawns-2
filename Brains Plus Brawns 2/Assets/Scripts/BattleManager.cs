@@ -29,6 +29,24 @@ public class BattleManager : MonoBehaviour
     // Player Party Manager
     public string[] playerNames = { "Gandalf", "Arthur", "Robin Hood", "Bruce Lee" }; // to be saved from game start and passed in function
     PlayerClass[] playerClasses = { PlayerClass.Wizard, PlayerClass.Knight, PlayerClass.Archer, PlayerClass.Brawler };
+    public Sprite wizardSprite;
+    public Sprite knightSprite;
+    public Sprite archerSprite;
+    public Sprite brawlerSprite;
+    public Dictionary<PlayerClass, Sprite> playerSpriteDict = new Dictionary<PlayerClass, Sprite>();
+
+    // Enemy Sprites
+    public Sprite jesterSprite;
+    public Sprite skeletonSprite;
+    public Sprite dwarfSprite;
+    public Dictionary<EnemyType, Sprite> minionSpriteDict = new Dictionary<EnemyType, Sprite>();
+
+    // Boss Sprites
+    public Sprite hephaestusSprite;
+    public Sprite kingSprite;
+    public Sprite necromancerSprite;
+    public Dictionary<BossName, Sprite> bossSpriteDict = new Dictionary<BossName, Sprite>();
+
 
     // Current Party Stats 
     // An array of arrays that stores [cHP, CMP] for Wizard, Knight, Archer, Brawler respectively
@@ -87,9 +105,38 @@ public class BattleManager : MonoBehaviour
     private bool playerIsSelecting = true;
     List<UnityEngine.UI.Button> turnButtons = new List<UnityEngine.UI.Button>();
 
+    void Awake()
+    {
+        // Save player party sprites
+        playerSpriteDict = new Dictionary<PlayerClass, Sprite>
+        {
+            {PlayerClass.Wizard, wizardSprite},
+            {PlayerClass.Knight, knightSprite},
+            {PlayerClass.Archer, archerSprite},
+            {PlayerClass.Brawler, brawlerSprite}
+        };
+
+        // Save enemy sprites
+        minionSpriteDict = new Dictionary<EnemyType, Sprite>
+        {
+            {EnemyType.Jester, jesterSprite},
+            {EnemyType.Skeleton, skeletonSprite},
+            {EnemyType.Dwarf, dwarfSprite}
+        };
+
+        bossSpriteDict = new Dictionary<BossName, Sprite>
+        {
+            {BossName.Hephaestus, hephaestusSprite},
+            {BossName.King, kingSprite},
+            {BossName.Necromancer, necromancerSprite},
+        };
+    }
+
     // Start is called before the first frame update
     void Start()
     {
+        
+
         // Set Button texts and initiialisations based on which screen we are in
         SetMenu(ButtonMenu.Main);
 
@@ -385,6 +432,10 @@ public class BattleManager : MonoBehaviour
             playerComponent.initialiseMember(playerNames[i], playerClasses[i]);
             emptyPlayer.name = playerComponent.baseClass.ToString();
 
+            // Set sprite
+            SpriteRenderer spriteRenderer = emptyPlayer.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = playerSpriteDict[playerComponent.baseClass];
+
             playerPartyMemberComponents.Add(playerComponent);
 
             // Set cHP, cMP to previously stored (if -1, it remains at maxHP and maxMP as per initialisation)
@@ -421,6 +472,10 @@ public class BattleManager : MonoBehaviour
             minionComponent.entityName = minionComponent.entityName + " " + (i + 1);
             emptyMinion.name = minionComponent.entityName;
 
+            // Set sprite
+            SpriteRenderer spriteRenderer = emptyMinion.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = minionSpriteDict[minionComponent.enemyType];
+
             enemyPartyComponents.Add(minionComponent);
         }
     }
@@ -431,6 +486,7 @@ public class BattleManager : MonoBehaviour
         // Empty previous lists
         playerPartyMemberComponents = new List<BattleEntity>();
         enemyPartyComponents = new List<BattleEntity>();
+        SpriteRenderer spriteRenderer;
 
         // 1. Player Section
 
@@ -447,6 +503,10 @@ public class BattleManager : MonoBehaviour
             emptyPlayer.name = playerComponent.baseClass.ToString();
             
             playerPartyMemberComponents.Add(playerComponent);
+
+            // Set sprite
+            spriteRenderer = emptyPlayer.GetComponent<SpriteRenderer>();
+            spriteRenderer.sprite = playerSpriteDict[playerComponent.baseClass];
 
             // Set cHP, cMP to previously stored (if -1, it remains at maxHP and maxMP as per initialisation)
             if (currHPs[i] != -1 && currMPs[i] != -1)
@@ -476,6 +536,10 @@ public class BattleManager : MonoBehaviour
         bossComponent.initialiseBoss(bossName);
         emptyBoss.name = bossComponent.entityName;
         enemyPartyComponents.Add(bossComponent);
+
+        // Set sprite
+        spriteRenderer = emptyBoss.GetComponent<SpriteRenderer>();
+        spriteRenderer.sprite = bossSpriteDict[bossComponent.bossName];
     }
 
     // battleOrder function, calculates order of given combat encounter 
@@ -518,6 +582,16 @@ public class BattleManager : MonoBehaviour
                 playerIsSelecting = true;
             turnIndicator.SetText(currEntity.entityName + "'s Turn: ");
 
+            // Move entity sprite ahead by a bit to indicate their turn
+            if(currEntity.entityType == BattleEntity.EntityType.PartyMember) 
+            {
+                currEntity.gameObject.transform.position += new Vector3(-1.25f, 0, 0);
+            }
+            else
+            {
+                currEntity.gameObject.transform.position += new Vector3(+1, 0, 0);
+            }
+
             /*
             // Calls entity's turn function and pass relevant team info
             if(currEntity.entityType == BattleEntity.EntityType.PartyMember) // party members
@@ -541,6 +615,16 @@ public class BattleManager : MonoBehaviour
             */
             yield return StartCoroutine(executeMoveChoice());
             ChangeMenu(esc_flg: true);
+
+            // Move entity sprite back
+            if (currEntity.entityType == BattleEntity.EntityType.PartyMember)
+            {
+                currEntity.gameObject.transform.position += new Vector3(+1.25f, 0, 0);
+            }
+            else
+            {
+                currEntity.gameObject.transform.position += new Vector3(-1, 0, 0);
+            }
 
             // Manage entitities with multiple turns
             currEntity.turnsLeft--;

@@ -8,6 +8,7 @@ TagManager:
   - NPC
   - Canvas
   - Player Move Point
+  - Player Sprite
   layers:
   - Default
   - TransparentFX

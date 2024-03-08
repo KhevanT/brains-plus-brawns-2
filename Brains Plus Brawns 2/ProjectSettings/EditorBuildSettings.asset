@@ -9,12 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Demo Kingdom.unity
+    guid: e95407bfed49fc142bf2b22b731265b9
+  - enabled: 1
+    path: Assets/Scenes/Demo Overworld.unity
+    guid: a127c8ac2ed630146a8c96f453e87285
+  - enabled: 1
     path: Assets/Scenes/Overworld Main.unity
     guid: fa231f011f94b0a47ba5d62c290a279b
+  - enabled: 1
+    path: Assets/Scenes/BattleScene.unity
+    guid: 809dd6b80c6ef914bbd0f80e874e91fb
   - enabled: 1
     path: Assets/Scenes/Volcano Kingdom.unity
     guid: acfbe6576801ac544ac87d2c56949068
   - enabled: 1
-    path: Assets/Scenes/BattleScene.unity
-    guid: 809dd6b80c6ef914bbd0f80e874e91fb
+    path: Assets/Scenes/King Kingdom.unity
+    guid: 0920f82e4c61b0e429328c524244025d
+  - enabled: 1
+    path: Assets/Scenes/Necromancer Kingdom.unity
+    guid: f58107738d0efe948bcd6519fceccb2c
   m_configObjects: {}
