@@ -6,7 +6,6 @@ using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.PlayerSettings;
 
 // PartyMember class, child of BattleEntity
 // Gives functionality for all player characters in combat
