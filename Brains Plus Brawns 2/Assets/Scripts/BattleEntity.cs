@@ -388,6 +388,7 @@ public class BattleEntity : MonoBehaviour
     public void PrintAllStats()
     {
         Debug.Log("Entity Name: " + entityName);
+        /*
         Debug.Log("Entity Type: " + entityType);
         Debug.Log("mHP: " + mHP);
         Debug.Log("mMP: " + mMP);
@@ -396,6 +397,7 @@ public class BattleEntity : MonoBehaviour
         Debug.Log("Attack: " + attack);
         Debug.Log("Defense: " + mMP);
         Debug.Log("Speed: " + cHP);
+        */
         Debug.Log("Move 1: " + moves[0].ToString());
         if (moves.Length > 1)
             Debug.Log("Move 2: " + moves[1].ToString());
@@ -484,7 +486,13 @@ public class Move
     public Move(string name, string movetype, int power, int mpCost)
     {
         this.name = name;
-        Enum.TryParse(movetype, out MoveType type); // parse string as enum
+
+        if (movetype == MoveType.Target.ToString())
+            type = MoveType.Target;
+        else
+            type = MoveType.Sweeping;
+
+        // Enum.TryParse(movetype, out type); // parse string as enum
         this.power = power;
         this.mpCost = mpCost;
     }

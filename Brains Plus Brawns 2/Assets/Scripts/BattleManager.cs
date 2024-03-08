@@ -151,11 +151,6 @@ public class BattleManager : MonoBehaviour
         allEntities.AddRange(enemyPartyComponents);
         entityCount = allEntities.Count;
 
-        // Disable turn choice buttons
-        //turnButtons.Add(attackButton);
-        //turnButtons.Add(guardButton);
-        //turnButtons.Add(healButton);
-
         foreach(UnityEngine.UI.Button button in turnButtons)
         {
             button.interactable = false;
