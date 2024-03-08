@@ -14624,6 +14624,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 41166827}
     m_Modifications:
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: isBossFight
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5809123086367789973, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.5

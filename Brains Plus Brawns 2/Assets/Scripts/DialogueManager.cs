@@ -92,6 +92,15 @@ public class DialogueManager : MonoBehaviour
             // Load corresponding scene
             if (currentTrigger.locationKingdom == Kingdom.GICT)
                 SceneManager.LoadScene("Volcano Kingdom");
+
+            if (currentTrigger.locationKingdom == Kingdom.SAS)
+                SceneManager.LoadScene("Necromancer Kingdom");
+
+            if (currentTrigger.locationKingdom == Kingdom.AMSOM)
+                SceneManager.LoadScene("King Kingdom");
+
+            if (currentTrigger.locationKingdom == Kingdom.Demo)
+                SceneManager.LoadScene("Demo Kingdom");
         }
 
         if (currentTrigger.isBattleTrigger)

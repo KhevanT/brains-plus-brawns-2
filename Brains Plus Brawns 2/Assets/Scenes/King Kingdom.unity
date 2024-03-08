@@ -313,6 +313,14 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[0].name
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.data[0]
+      value: 
+      objectReference: {fileID: 1050003917}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -347,6 +355,10 @@ PrefabInstance:
     - target: {fileID: 3080253825303808476, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: enemyCount
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3080253825303808476, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+      propertyPath: requirementsForStaircase.Array.size
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_LocalPosition.x
@@ -390,7 +402,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1
+      value: 1F WA2 Battle Cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -400,6 +412,11 @@ PrefabInstance:
 --- !u!4 &170759462 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 170759461}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &170759463 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 170759461}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &185009084 stripped
@@ -1255,6 +1272,14 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[0].name
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.data[0]
+      value: 
+      objectReference: {fileID: 422926522}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1328,7 +1353,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1 (1)
+      value: 3F Battle Cloud 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1338,6 +1363,11 @@ PrefabInstance:
 --- !u!4 &236723190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 236723189}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &236723191 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 236723189}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &244557603 stripped
@@ -1451,7 +1481,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1
+      value: 3F Battle Cloud 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1461,6 +1491,11 @@ PrefabInstance:
 --- !u!4 &336899827 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 336899826}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &336899828 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 336899826}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &365210887
@@ -1814,7 +1849,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1
+      value: 1F WA1 Battle Cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1824,6 +1859,11 @@ PrefabInstance:
 --- !u!4 &422926521 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 422926520}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &422926522 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 422926520}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &451481131 stripped
@@ -5761,7 +5801,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1
+      value: 2F WA2 Battle Cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -5771,6 +5811,11 @@ PrefabInstance:
 --- !u!4 &1050003916 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 1050003915}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1050003917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 1050003915}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1067436671
@@ -6448,7 +6493,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
       propertyPath: m_Name
-      value: Battle Cloud 1
+      value: 2F WA1 Battle Cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -6458,6 +6503,11 @@ PrefabInstance:
 --- !u!4 &1132891848 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7083956933244415422, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
+  m_PrefabInstance: {fileID: 1132891847}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1132891849 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7383042554129624542, guid: bf5a5f2adf136d54caae25a4582a8e44, type: 3}
   m_PrefabInstance: {fileID: 1132891847}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1141164398
@@ -10245,6 +10295,14 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[0].name
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.data[0]
+      value: 
+      objectReference: {fileID: 1132891849}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11136,7 +11194,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7227457594814832551, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
       propertyPath: m_Name
-      value: Boss Battle Cloud
+      value: 3F Boss Battle Cloud
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -11320,6 +11378,14 @@ PrefabInstance:
       propertyPath: dialogue.Array.data[0].name
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: requirementsForStaircase.Array.data[0]
+      value: 
+      objectReference: {fileID: 170759463}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -16834,6 +16900,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[0]
+      value: 
+      objectReference: {fileID: 422926522}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[1]
+      value: 
+      objectReference: {fileID: 170759463}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[2]
+      value: 
+      objectReference: {fileID: 1132891849}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[3]
+      value: 
+      objectReference: {fileID: 1050003917}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[4]
+      value: 
+      objectReference: {fileID: 336899828}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[5]
+      value: 
+      objectReference: {fileID: 236723191}
+    - target: {fileID: 8133394273104578690, guid: 18311e5026f99a541896e40931125a54, type: 3}
+      propertyPath: enemies.Array.data[6]
+      value: 
+      objectReference: {fileID: 1407229596}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
