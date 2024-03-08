@@ -1,0 +1,5 @@
+Class,HP,MP,Attack,Defense,Speed,Move 1 Name,Move 1 Type,Move 1 Power,Move 1 MP Cost,Move 2 Name,Move 2 Type,Move 2 Power,Move 2 MP Cost
+Wizard,70,10,30,8,15,Fireball,Target,16,1,Meteor Shower,Sweep,10,2
+Knight,90,10,20,15,10,Steel Slice,Target,16,1,Light Steel Slash,Sweep,10,2
+Archer,80,10,25,10,13,Arrow Pierce,Target,16,1,Arrow Flurry,Sweep,10,2
+Brawler,85,10,10,12,12,Sucker Punch,Target,16,1,Close Combat,Sweep,10,2

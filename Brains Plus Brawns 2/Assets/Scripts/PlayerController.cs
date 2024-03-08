@@ -20,7 +20,6 @@ public class PlayerController : MonoBehaviour
 
     // Sprite
     SpriteRenderer spriteRenderer;
-    bool facingRight = false;
 
     // Start is called before the first frame update
     void Start()
@@ -64,12 +63,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (horizontalInput <= 0)
                 {
-                    facingRight = false;
                     spriteRenderer.flipX = false;
                 }
                 else
                 {
-                    facingRight = true;
                     spriteRenderer.flipX = true;
                 }
 

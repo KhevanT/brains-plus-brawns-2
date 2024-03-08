@@ -8194,25 +8194,33 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: dialogue.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: dialogue.Array.data[0].line
-      value: 'Hi! I''m an NPC! I may be in the game as well as out in the real world
-        at Ahmedabad University. '
+      value: 'Hi! I''m an NPC (non playable character)! '
       objectReference: {fileID: 0}
     - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: dialogue.Array.data[0].name
-      value: NPC - Non Playable Character
+      value: NPC
       objectReference: {fileID: 0}
     - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
       propertyPath: dialogue.Array.data[1].line
+      value: 'I may be in the game as well as out in the real world at Ahmedabad
+        University. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: dialogue.Array.data[1].name
+      value: NPC
+      objectReference: {fileID: 0}
+    - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
+      propertyPath: dialogue.Array.data[2].line
       value: Try to interact with me whenever possible, I might just have some way
         to help you out ;)
       objectReference: {fileID: 0}
     - target: {fileID: 8725789988106204603, guid: f4e51b526fb4e944bae7ea1322f7e449, type: 3}
-      propertyPath: dialogue.Array.data[1].name
-      value: NPC - Non Playable Character
+      propertyPath: dialogue.Array.data[2].name
+      value: NPC
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

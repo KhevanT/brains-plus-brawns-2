@@ -6,6 +6,7 @@ using System.Xml.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Unity.IO;
 
 // PartyMember class, child of BattleEntity
 // Gives functionality for all player characters in combat
@@ -16,7 +17,7 @@ public class PartyMember : BattleEntity
     public PlayerClass baseClass;
 
     // CSV
-    string playerStat_filePath = "/CSV/Player_Stats.csv";
+    string playerStat_filePath = "Player_Stats.csv";
 
     // Initialise function
     public void initialiseMember(string name, PlayerClass baseClass)
@@ -98,9 +99,9 @@ public class PartyMember : BattleEntity
     // It is overriden because of this line " if (vals[0] == baseClass.ToString()) "
     // & since baseClass is a child property, we cant access it in parent class
     // POTENTIAL FIX: it may be possible to fix this in the code to minimise repetition
-    public override void ReadFromCSV(string filePath)
+    public override void ReadFromCSV(string fileName)
     {
-        string fullPath = Application.dataPath + filePath;
+        string fullPath = Path.Combine(Application.streamingAssetsPath, fileName);
         // Debug.Log(fullPath);
         if (File.Exists(fullPath))
         {

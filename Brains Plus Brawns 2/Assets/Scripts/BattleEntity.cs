@@ -5,6 +5,7 @@ using UnityEngine;
 using System.IO;
 using TMPro;
 using UnityEngine.UI;
+using Unity.IO;
 
 // BattleEntity class, parent class for BattleEnemy and PartyMember
 // Manages health, basic stats, moves, etc for all entities involved in combat
@@ -335,10 +336,9 @@ public class BattleEntity : MonoBehaviour
     // 3. Stat Related Functions
 
     // Reads data from enemy csv
-    public virtual void ReadFromCSV(string filePath)
+    public virtual void ReadFromCSV(string fileName)
     {
-        string fullPath = Application.dataPath + filePath;
-        // Debug.Log(fullPath);
+        string fullPath = Path.Combine(Application.streamingAssetsPath, fileName);
 
         if (File.Exists(fullPath))
         {

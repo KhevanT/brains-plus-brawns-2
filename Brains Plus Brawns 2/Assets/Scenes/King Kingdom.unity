@@ -5649,7 +5649,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.7686275, g: 0.7686275, b: 0.7686275, a: 0}
+  m_BackGroundColor: {r: 0.15471691, g: 0.15471691, b: 0.15471691, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -11151,6 +11151,36 @@ PrefabInstance:
     - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
       propertyPath: isBossFight
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[0].line
+      value: How dare you enter and defile my kingdom with your lowly peasant behaviour!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[0].name
+      value: Glutton King
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[1].line
+      value: But now that you're here, my finance minister just dropped dead last
+        week (probably from the lashings I gave him)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[1].name
+      value: Glutton King
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[2].line
+      value: Soooo, could your pretty please use your "Brawns" to do my taxes or
+        well you know use your "Brawns" and DIE!
+      objectReference: {fileID: 0}
+    - target: {fileID: 5731933987207977958, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
+      propertyPath: dialogue.Array.data[2].name
+      value: Glutton King
       objectReference: {fileID: 0}
     - target: {fileID: 5809123086367789973, guid: 0c19bbba5bbb7fe49b2eb97f89aa35cf, type: 3}
       propertyPath: m_LocalPosition.x

@@ -11,7 +11,7 @@ public class BattleBoss : BattleEntity
     public BossName bossName;
 
     // CSV
-    string enemyStat_filePath = "/CSV/Enemy_Stats.csv";
+    string enemyStat_fileName = "Enemy_Stats.csv";
 
     // Intialise boss
     public void initialiseBoss(BossName name)
@@ -30,7 +30,7 @@ public class BattleBoss : BattleEntity
         moves = new Move[2]; // bosses have 2 moves
 
         // Read stats and move data from csv
-        ReadFromCSV(enemyStat_filePath);
+        ReadFromCSV(enemyStat_fileName);
 
         // Current stats
         cHP = mHP;

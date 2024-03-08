@@ -11,7 +11,7 @@ public class BattleEnemy : BattleEntity
     public EnemyType enemyType;
 
     // CSV
-    string enemyStat_filePath = "/CSV/Enemy_Stats.csv";
+    string enemyStat_fileName = "Enemy_Stats.csv";
 
     // Initialise enemy
     public void initialiseEnemy(EnemyType type)
@@ -24,7 +24,7 @@ public class BattleEnemy : BattleEntity
         moves = new Move[1];
 
         // Read stats and move data from csv
-        ReadFromCSV(enemyStat_filePath);
+        ReadFromCSV(enemyStat_fileName);
 
         // Current stats
         cHP = mHP;

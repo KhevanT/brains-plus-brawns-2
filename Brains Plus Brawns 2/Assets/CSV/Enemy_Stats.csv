@@ -1,7 +1,0 @@
-Name,Type,HP,MP,Attack,Defense,Speed,Move 1 Name,Move 1 Type,Move 1 Power,Move 1 MP Cost,Move 2 Name,Move 2 Type,Move 2 Power,Move 2 MP Cost
-Dwarf,Minion,50,10,15,15,15,Anvil Strike,Target,10,1,,,,
-Hephaestus,Boss,250,20,20,20,20,Firagaball,Target,25,1,Volcanic Eruption,Sweep,20,2
-Skeleton,Minion,75,10,15,15,15,Bone Jab,Target,10,1,,,,
-Necromancer,Boss,250,25,25,18,25,Poison Strike,Target,25,1,Venom Cloud,Sweep,20,2
-Jester,Minion,50,10,15,15,15,Juggling Ball Throw,Target,10,1,,,,
-King,Boss,250,20,18,25,18,Minister's Sword Strike,Target,25,1,Throne Stomp,Sweep,20,2
