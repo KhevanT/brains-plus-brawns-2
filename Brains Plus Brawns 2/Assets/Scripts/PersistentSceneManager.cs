@@ -8,6 +8,7 @@ public static class PersistentSceneManager
     public static string currScene { get; private set; }                                         // always other than BattleScene
     public static Vector3 playerPos { get; private set; } = new Vector3(0.5f, 0.5f, 0);
     public static List<string> enemyObjs { get; private set; } = new List<string>();
+    public static List<string> disabledEnemyObjs { get; private set; } = new List<string>();
     public static int enemyIndex { get; private set; } = -1;
 
     public static void InitScene(string scene, Vector3 playerPos, List<GameObject> enemyObjs, string currEnemy)
@@ -57,10 +58,21 @@ public static class PersistentSceneManager
 
     private static void DisableEnemyWithCurrIndex()
     {
+        GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NPC");
+        foreach (string dso in disabledEnemyObjs)
+        {
+            foreach (GameObject go in gameObjects)
+            {
+                if (go.name == dso)
+                {
+                    go.SetActive(false);
+                }
+            }
+        }
+
         if (enemyIndex != -1)
         {
             string co = GetCurrEnemy();
-            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NPC");
             Debug.Log(gameObjects.Length);
 
             foreach (GameObject go in gameObjects)
@@ -68,6 +80,7 @@ public static class PersistentSceneManager
                 if (go.name == co)
                 {
                     go.SetActive(false);
+                    disabledEnemyObjs.Add(co);
                 }
             }
         }
