@@ -14,6 +14,19 @@ public class DialogueLine
 
 public class DialogueTrigger : MonoBehaviour
 {
+    public List<GameObject> requirementsForStaircase = new List<GameObject>();
+
+    public bool HaveMetRequirements()
+    {
+        foreach (GameObject requirement in requirementsForStaircase)
+        {
+            if (requirement.activeSelf)
+                return false;
+        }
+
+        return true;
+    }
+
     public Kingdom locationKingdom;
     public bool isGateKeeper = false;
     public bool isPasswordCorrect = false;

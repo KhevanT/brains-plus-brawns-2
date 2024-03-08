@@ -155,6 +155,7 @@ public class BattleEntity : MonoBehaviour
             if (moves[moveChoice].type == Move.MoveType.Target) // 1. Target move
             {
                 // Calculate damage for this randomly selected entity
+                Debug.Log(oppIndex + " " + moveChoice);
                 int dmg = calculateDMG(oppTeam[oppIndex], moves[moveChoice]);
 
                 // Ask player to receive damage (guard breaking, death, all handled inside takeDMG)

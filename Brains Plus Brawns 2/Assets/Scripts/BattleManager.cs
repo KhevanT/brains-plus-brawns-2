@@ -593,7 +593,6 @@ public class BattleManager : MonoBehaviour
             else if(enemyDead)
             {
                 Debug.Log("The players have won.");
-                PersistentSceneManager.DisableEnemyWithCurrIndex();
                 SceneManager.LoadScene(PersistentSceneManager.currScene);
             }
             else

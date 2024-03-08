@@ -6,32 +6,42 @@ using UnityEngine.SceneManagement;
 public static class PersistentSceneManager
 {
     public static string currScene { get; private set; }                                         // always other than BattleScene
-    public static Vector3 playerPos { get; private set; }
-    public static List<GameObject> enemyObjs { get; private set; }
-    public static int enemyIndex { get; private set; }
+    public static Vector3 playerPos { get; private set; } = new Vector3(0.5f, 0.5f, 0);
+    public static List<string> enemyObjs { get; private set; } = new List<string>();
+    public static int enemyIndex { get; private set; } = -1;
 
-    public static void InitScene(string scene, Vector3 playerPos, ref List<GameObject> enemyObjs, string currEnemy)
+    public static void InitScene(string scene, Vector3 playerPos, List<GameObject> enemyObjs, string currEnemy)
     {
-        enemyObjs.Clear();
-
+        Debug.Log("Player Pos " + playerPos);
         currScene = scene;
         PersistentSceneManager.playerPos = playerPos;
-        PersistentSceneManager.enemyObjs = enemyObjs;
 
+        foreach (GameObject obj in enemyObjs)
+            PersistentSceneManager.enemyObjs.Add(obj.name);
+
+        Debug.Log(enemyObjs.Count);
         SetEnemyIndex(currEnemy);
     }
 
     public static int GetIndexFromEnemy(string enemy)
     {
+        Debug.Log(enemyObjs.Count);
         for (int index = 0; index < enemyObjs.Count; ++index)
         {
-            if (enemyObjs[index].name == enemy)
+            Debug.Log("REACHED");
+            Debug.Log(enemy + " " + enemyObjs[index]);
+            if (enemyObjs[index] == enemy)
             {
                 return index;
             }
         }
 
         return -1;
+    }
+
+    public static string GetCurrEnemy()
+    {
+        return enemyObjs[enemyIndex];
     }
 
     public static bool SetEnemyIndex(string enemy)
@@ -45,13 +55,35 @@ public static class PersistentSceneManager
             return true;
     }
 
-    public static void DisableEnemyWithCurrIndex()
+    private static void DisableEnemyWithCurrIndex()
     {
         if (enemyIndex != -1)
         {
-            enemyObjs[enemyIndex].SetActive(false);
-            enemyIndex = -1;
+            string co = GetCurrEnemy();
+            GameObject[] gameObjects = GameObject.FindGameObjectsWithTag("NPC");
+            Debug.Log(gameObjects.Length);
+
+            foreach (GameObject go in gameObjects)
+            {
+                if (go.name == co)
+                {
+                    go.SetActive(false);
+                }
+            }
         }
+    }
+
+    private static void MovePlayerToPosXY(ref GameObject pl, ref GameObject plmvpt)
+    {
+        Debug.Log(playerPos);
+        pl.transform.position = playerPos;
+        plmvpt.transform.position = playerPos;
+    }
+
+    public static void SetupScene(ref GameObject pl, ref GameObject plmvpt)
+    {
+        MovePlayerToPosXY(ref pl, ref plmvpt);
+        DisableEnemyWithCurrIndex();
     }
 }
 

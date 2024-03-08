@@ -99,12 +99,13 @@ public class DialogueManager : MonoBehaviour
                 PersistenceManager.SetPersistentStateMinion(currentTrigger.enemyType, currentTrigger.enemyCount);
             else
                 PersistenceManager.SetPersistentStateBoss(currentTrigger.bossName);
-            PersistentSceneManager.InitScene(SceneManager.GetActiveScene().name, transform.position, ref enemies, gameObject.name);
+            Debug.Log(enemies.Count);
+            PersistentSceneManager.InitScene(SceneManager.GetActiveScene().name, GameObject.FindGameObjectWithTag("Player").transform.position, enemies, currentTrigger.gameObject.name);
             SceneManager.LoadScene("BattleScene");
         }
             
 
-        if (currentTrigger.isStaircase)
+        if (currentTrigger.isStaircase && currentTrigger.HaveMetRequirements())
         {
             // Change player position to target position
             GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -140,14 +141,15 @@ public class DialogueManager : MonoBehaviour
     private void Start()
     {
         SetChildren(false);
+        GameObject pl = GameObject.FindGameObjectWithTag("Player");
+        GameObject plmvpt = GameObject.FindGameObjectWithTag("Player Move Point");
+        PersistentSceneManager.SetupScene(ref pl, ref plmvpt);
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            Debug.Log(currentLine.isGate + ", " +  currentLine.isAfterGate + ", " + currentTrigger.isPasswordCorrect);
-
             if (currentLine.isGate && currentTrigger.isGateKeeper)
             {
                 // Enable password child, then make it child of canvas to make it visible
