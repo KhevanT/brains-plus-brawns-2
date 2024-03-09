@@ -649,6 +649,7 @@ public class BattleManager : MonoBehaviour
                 playerIsSelecting = true;
 
                 yield return StartCoroutine(executeMoveChoice());
+                Debug.Log(currEntity.hpPotionCount + " " + currEntity.mpPotionCount);
                 ChangeMenu(esc_flg: true);
                 //TurnChoice turnChoice = getTurnChoice();
                 //// TurnChoice turnChoice = TurnChoice.Attack;

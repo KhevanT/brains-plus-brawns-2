@@ -270,7 +270,7 @@ public class BattleEntity : MonoBehaviour
         cHP += hpPotionReplenish;
         hpPotionCount--;
 
-        turnInfo = entityName + " healed themselves and restored upto" + hpPotionReplenish + "points of HP";
+        turnInfo = entityName + " healed themselves and restored upto " + hpPotionReplenish + " points of HP";
         return turnInfo;
     }
 
@@ -281,7 +281,7 @@ public class BattleEntity : MonoBehaviour
         cMP += mpPotionReplenish;
         mpPotionCount--;
 
-        turnInfo = entityName + " healed themselves and restored upto" + hpPotionReplenish + "points of MP";
+        turnInfo = entityName + " healed themselves and restored upto " + mpPotionReplenish + " points of MP";
         return turnInfo;
     }
 

@@ -33,8 +33,8 @@ public static class PersistenceManager
     {
         foreach (BattleEntity plr in plrLst)
         {
-            playerStats[plr.entityName] = new List<int> { plr.cHP, plr.cMP };
-            Debug.Log(plr.cHP + " " + plr.cMP);
+            playerStats[plr.entityName] = new List<int> { plr.cHP, plr.cMP, plr.hpPotionCount, plr.mpPotionCount };
+            Debug.Log(plr.hpPotionCount + " " + plr.mpPotionCount);
         }
     }
 
@@ -44,10 +44,14 @@ public static class PersistenceManager
         {
             foreach (string name in playerStats.Keys)
             {
-                if (plr.entityName == name && plr.cHP > 0)                              // skip if not strictly greater than zero as it will otherwise mess up revive thingy
+                if (plr.entityName == name && plr.cHP > 0)              // skip if not strictly greater than zero as it will otherwise mess up revive thingy
                 {
-                    plr.cHP = playerStats[name][0];
-                    plr.cMP = playerStats[name][1];
+                    plr.cHP = playerStats[name][0];                     // 1. current HP
+                    plr.cMP = playerStats[name][1];                     // 2. current MP
+                    plr.hpPotionCount = playerStats[name][2];           // 3. HP potion count
+                    plr.mpPotionCount = playerStats[name][3];           // 4. MP potion count
+                    
+                    Debug.Log(plr.hpPotionCount + " " + plr.mpPotionCount);
                 }
             }
         }
