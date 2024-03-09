@@ -161,8 +161,26 @@ public class BattleManager : MonoBehaviour
         battleOrder();
         battleOrderTextObject.SetText(battleOrderString);
 
+        // load player data
+        PersistenceManager.LoadPlayerData(ref playerPartyMemberComponents);
+        UpdatePlayerStatsText();
+
         // Start combat
         StartCoroutine(turnManager());
+    }
+
+    private void UpdatePlayerStatsText()
+    {
+        playerStatsString = "Party Stats: \n";
+        int i = 0;
+        foreach (PartyMember playerComponent in playerPartyMemberComponents)
+        {
+            playerStatsString += $"{++i + 1}. {playerComponent.entityName} " +
+                $"\n HP: {playerComponent.cHP}/{playerComponent.mHP}" +
+                $"\n MP: {playerComponent.cMP}/{playerComponent.mMP} \n\n";
+        }
+
+        playerStatsTextObject.SetText(playerStatsString);
     }
 
     // Update is called once per frame
@@ -573,7 +591,7 @@ public class BattleManager : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(2);
             currEntity = allEntities[currentTurn];
-            if (currEntity.entityType == EntityType.PartyMember)
+            if (currEntity.entityType == EntityType.PartyMember || currEntity.entityType == EntityType.Boss)
                 playerIsSelecting = true;
             turnIndicator.SetText(currEntity.entityName + "'s Turn: ");
 
@@ -626,6 +644,7 @@ public class BattleManager : MonoBehaviour
             if (currEntity.turnsLeft > 0)
             {
                 turnIndicator.SetText(currEntity.entityName + "'s Second Turn: ");
+                playerIsSelecting = true;
 
                 yield return StartCoroutine(executeMoveChoice());
                 ChangeMenu(esc_flg: true);
@@ -672,6 +691,7 @@ public class BattleManager : MonoBehaviour
             else if(enemyDead)
             {
                 Debug.Log("The players have won.");
+                PersistenceManager.SavePlayerStats(playerPartyMemberComponents);
                 SceneManager.LoadScene(PersistentSceneManager.currScene);
             }
             else
@@ -721,7 +741,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator executeMoveChoice()
     {
-        if (currEntity.entityType == EntityType.PartyMember)
+        if (currEntity.entityType == EntityType.PartyMember || currEntity.entityType == EntityType.Boss)
             yield return StartCoroutine(WaitForPlayerInput());      // plain wrapper around an empty while loop to make sure the variables used below don't contain dummy/old values
 
         if (currChoice == TurnChoice.Attack)                                                    // [TODO] Update iski value
