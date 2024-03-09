@@ -419,7 +419,7 @@ public class BattleManager : MonoBehaviour
         }
         else if (currMode == ButtonMenu.Players)
         {
-            mvC = 1;
+            mvC = 0;
             playerIsSelecting = false;
         }
     }
@@ -748,12 +748,18 @@ public class BattleManager : MonoBehaviour
 
         if (currChoice == TurnChoice.Attack)                                                    // [TODO] Update iski value
         {
-            if (currEntity.entityType == EntityType.Enemy || currEntity.entityType == EntityType.Boss) // enemies
+            if (currEntity.entityType == EntityType.Enemy) // enemies
             {
                 turnInfoString = currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
             }
-            else
+            else if (currEntity.entityType == EntityType.Boss)
             {
+                Debug.Log(mvC + " " + currSelection);
+                turnInfoString = currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents, mvC, currSelection);
+
+            } else
+            {
+                Debug.Log(mvC + " " + currSelection);
                 turnInfoString = currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, mvC, currSelection);
             }
 
