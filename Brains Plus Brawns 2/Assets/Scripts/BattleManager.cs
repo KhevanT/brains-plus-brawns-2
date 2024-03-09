@@ -97,6 +97,8 @@ public class BattleManager : MonoBehaviour
     }
 
     public TMP_Text turnIndicator;
+    public TMP_Text turnInfo;
+    List<string> turnInfoString;
     public TMP_Text selector;
     public TMP_Text opt1;
     public TMP_Text opt2;
@@ -748,21 +750,35 @@ public class BattleManager : MonoBehaviour
         {
             if (currEntity.entityType == EntityType.Enemy || currEntity.entityType == EntityType.Boss) // enemies
             {
-                currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
+                turnInfoString = currEntity.turnHandler(TurnChoice.Attack, ref playerPartyMemberComponents);
             }
             else
             {
-                currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, mvC, currSelection);
+                turnInfoString = currEntity.turnHandler(TurnChoice.Attack, ref enemyPartyComponents, mvC, currSelection);
             }
 
         } else if (currChoice == TurnChoice.Heal)
         {
-            currEntity.turnHandler(TurnChoice.Heal, ref enemyPartyComponents, mvC);
+            turnInfoString = currEntity.turnHandler(TurnChoice.Heal, ref enemyPartyComponents, mvC);
 
         } else if (currChoice == TurnChoice.Guard)
         {
-            currEntity.turnHandler(TurnChoice.Guard, ref enemyPartyComponents);
+            turnInfoString = currEntity.turnHandler(TurnChoice.Guard, ref enemyPartyComponents);
         }
+
+        turnInfo.SetText(ListToStr(turnInfoString));
+    }
+
+    private string ListToStr(List<string> turnInfoString)
+    {
+        string tis = "";
+
+        foreach (string turnInfo in turnInfoString)
+        {
+            tis += turnInfo;
+        }
+
+        return tis;
     }
 
     // Calls functions based on turn choice for given entity

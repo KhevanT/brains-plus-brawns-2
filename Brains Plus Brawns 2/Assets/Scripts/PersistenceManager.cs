@@ -46,7 +46,6 @@ public static class PersistenceManager
             {
                 if (plr.entityName == name && plr.cHP > 0)                              // skip if not strictly greater than zero as it will otherwise mess up revive thingy
                 {
-                    Debug.Log(playerStats[name][0] + " " + playerStats[name][1]);
                     plr.cHP = playerStats[name][0];
                     plr.cMP = playerStats[name][1];
                 }

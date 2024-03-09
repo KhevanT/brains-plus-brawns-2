@@ -73,7 +73,6 @@ public static class PersistentSceneManager
         if (enemyIndex != -1)
         {
             string co = GetCurrEnemy();
-            Debug.Log(gameObjects.Length);
 
             foreach (GameObject go in gameObjects)
             {

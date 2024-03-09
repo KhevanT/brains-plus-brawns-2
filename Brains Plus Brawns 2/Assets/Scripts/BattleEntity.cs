@@ -73,10 +73,12 @@ public class BattleEntity : MonoBehaviour
     }
     
     // Calls functions based on turn choice
-    public void turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam, int moveChoice=0, int oppIndex=0)
+    public List<string> turnHandler(TurnChoice turnChoice,ref List<BattleEntity> oppTeam, int moveChoice=0, int oppIndex=0)
     {
+        List<string> returnText = new List<string>();
         if(!alive)
         {
+            returnText.Add(entityName + " is dead and cannot make a turn.");
             Debug.Log(entityName + " is dead and cannot make a turn.");
         }
         else if (alive && turnsLeft > 0)
@@ -89,6 +91,7 @@ public class BattleEntity : MonoBehaviour
             if (guarding && turnsLeft == 0)
             {
                 guarding = false;
+                returnText.Add(entityName + "'s previously raised guard has been lowered");
                 Debug.Log(entityName + "'s previously raised guard has been lowered");
             }
 
@@ -111,10 +114,13 @@ public class BattleEntity : MonoBehaviour
                         turnInfo = performMPHeal();
                     break;
             }
+            returnText.Add(turnInfo);
             Debug.Log(turnInfo);
 
             // turn counter in battle manager
         }
+
+        return returnText;
     }
 
     // attackHandler Function, maps correct attack function for different entities
